@@ -15,11 +15,11 @@ describe("Worker", () => {
 		await worker.stop();
 	});
 
-	it("should return Hello World", async () => {
+	it("should return the home route welcome response", async () => {
 		const resp = await worker.fetch();
 		if (resp) {
-			const text = await resp.text();
-			expect(text).toMatchInlineSnapshot(`"Hello World!"`);
+			const text = await resp.json();
+			expect(text).toMatchObject({ routeNote: "Welcome to the API" });
 		}
 	});
 });
