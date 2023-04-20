@@ -10,7 +10,7 @@ const router = Router();
 router.all("*", preflight);
 
 router.get("/", () => {
-    return returnResponse({ routeNote: "Welcome to the API" });
+  return returnResponse({ routeNote: "Welcome to the API" });
 });
 
 router.all("*", () =>
