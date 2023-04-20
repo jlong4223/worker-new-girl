@@ -1,0 +1,107 @@
+// this is just a place for my api response ideas
+ let returnobj
+
+
+// routes for characters
+// GET /characters/main
+// GET /characters/recurring
+// GET /characters/:id/details
+// GET /showInfo
+
+// /characters/main
+
+returnobj = [
+    {
+        id: 1,
+        name: "Nick Miller",
+        age: 30,
+        image: ''
+    }
+]
+
+// /characters/recurring
+
+returnobj = [
+    {
+        id: 1,
+        name: "Coach",
+        age: 30,
+        image: '',
+        seeThem: [
+            {
+                season: 1,
+                episode: 1,
+            }
+        ]
+    }
+]
+
+
+
+
+// characters/:id/
+
+returnobj = [
+    {
+        id: 1,
+        name: "Nick Miller",
+        age: 30,
+        occupation: "Bartender",
+        birthPlace: "Chicago",
+        likes: "Cookies",
+        dislikes: "Lawyers",
+        finalQuote: "",
+        ethnicity: "White",
+        // --- quotes could also be an array of quote ids?
+        // --- these are 1 to many
+        quotes: [
+            {
+                id: 1,
+                quote: "You give me cookie, I give you cookie",
+                characterId: 1,
+                characterName: "Nick Miller",
+                episode: "4",
+                season: "4",
+                episodeName: ''
+            }
+        ],
+        // --- friends will just be an array of character ids
+        // --- these are many to many?
+        friends: [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+    }
+]
+
+// /showInfo or just home route
+
+returnobj = {
+    name: "New girl",
+    seasons: 7,
+    episodes: 148,
+    characters: [], // array of character ids or just names even 
+    plot: '',
+    location: 'Los Angeles',
+    creator: 'Elizabeth Meriwether',
+    writers: ['Elizabeth Meriwether', 'David Guarascio', 'Meredith Scardino'],
+    genre: 'Comedy',
+    rottenTomatoes: [
+        {
+            season: 1,
+            tomatoMeter: 87,
+            audienceScore: 86
+        } 
+    ],
+    network: 'Fox',
+    firstAired: 'September 20, 2011',
+    lastAired: 'May 14, 2018',
+    whereToWatch: 'Netflix',
+    openingTheme: '',
+    episodeRunTime: '21-24 minutes',
+}
+
+
+
+
+
+// resources
+// https://www.scarymommy.com/new-girl-quotes
+// https://github.com/zahwah-codes/newgirl-api

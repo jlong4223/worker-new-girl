@@ -1,0 +1,22 @@
+import { createCors } from "itty-cors";
+import { Router } from "itty-router";
+import { returnResponse } from "./utils/routes";
+
+const { preflight, corsify } = createCors({ origins: ["*"] });
+
+const router = Router();
+
+// @ts-ignore
+router.all("*", preflight);
+
+router.get("/", () => {
+    return returnResponse({ routeNote: "Welcome to the API" });
+});
+
+router.all("*", () =>
+  returnResponse({ routeNote: "No route found", status: 404 }, 404)
+);
+
+export const handleRequest = (request: Request) => {
+  return router.handle(request).then(corsify);
+};
