@@ -19,7 +19,7 @@ describe("Worker", () => {
     const resp = await worker.fetch();
     if (resp) {
       const text = await resp.json();
-      expect(text).toMatchObject({ routeNote: "Welcome to the API" });
+      expect(text).toMatchObject({ message: "Welcome to the API" });
     }
   });
 
