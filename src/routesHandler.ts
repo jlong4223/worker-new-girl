@@ -20,3 +20,11 @@ router.all("*", () =>
 export const handleRequest = (request: Request) => {
   return router.handle(request).then(corsify);
 };
+
+export const handleErrorRequest = (request: Request) => {
+  const statusCode = 500;
+  return returnResponse(
+    { message: "Theres been an error accessing the api" },
+    statusCode
+  );
+};

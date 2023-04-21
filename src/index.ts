@@ -1,4 +1,4 @@
-import { handleRequest } from "./routesHandler";
+import { handleErrorRequest, handleRequest } from "./routesHandler";
 
 export interface Env {
   // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -15,5 +15,9 @@ export interface Env {
 }
 
 addEventListener("fetch", (event: FetchEvent) => {
-  event.respondWith(handleRequest(event.request));
+  try {
+    event.respondWith(handleRequest(event.request));
+  } catch (e: any | unknown) {
+    event.respondWith(handleErrorRequest(event.request));
+  }
 });
