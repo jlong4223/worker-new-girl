@@ -7,6 +7,10 @@ let returnobj;
 // GET /characters/:id/details
 // GET /showInfo
 
+// allow the user to request updates to the database that i will review and approve
+// POST /characters/new
+// POST /characters/:id/update
+
 // /characters/main
 
 returnobj = [

@@ -27,3 +27,10 @@ export async function getCharacters(
   );
   return documentsData;
 }
+
+export const getRandomCharacter = async () => {
+  const characters = await getCharacters();
+  const randomCharacter =
+    characters[Math.floor(Math.random() * characters.length)];
+  return randomCharacter;
+};
