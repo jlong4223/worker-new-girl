@@ -5,6 +5,8 @@ import { welcomeHander } from "./handlers/welcome";
 import { notFoundHandler } from "./handlers/notFound";
 import { getCharactersHandler } from "./handlers/getCharacters";
 import { getRandomCharactersHandler } from "./handlers/getRandomCharacters";
+import { verifyBody } from "./middleware/verifyCharacters";
+import { createCharacterHandler } from "./handlers/createCharacter";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -13,8 +15,13 @@ const router = Router();
 // @ts-ignore
 router.all("*", preflight);
 router.get("/", welcomeHander);
+
+// character routes
 router.get("/characters", getCharactersHandler);
 router.get("/characters/random", getRandomCharactersHandler);
+// @ts-ignore
+router.post("/characters", verifyBody, createCharacterHandler);
+
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
