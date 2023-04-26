@@ -3,7 +3,7 @@ import { Router } from "itty-router";
 import { returnResponse } from "./utils/routes";
 import { welcomeHander } from "./handlers/welcome";
 import { notFoundHandler } from "./handlers/notFound";
-import { faunaHandler } from "./handlers/firstFauna";
+import { getCharactersHandler } from "./handlers/getCharacters";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -12,7 +12,7 @@ const router = Router();
 // @ts-ignore
 router.all("*", preflight);
 router.get("/", welcomeHander);
-router.get("/fauna-ex", faunaHandler);
+router.get("/characters", getCharactersHandler);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
