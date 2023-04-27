@@ -1,5 +1,3 @@
-import { Paginate, Documents, Collection, Get, Ref, Create } from "faunadb";
-import { faunaClient } from "../../connection";
 import {
   AllDocumentRefs,
   CharacterDocDataRef,
@@ -8,21 +6,26 @@ import {
 import { T } from "vitest/dist/types-e3c9754d";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
+import {
+  createNewDocument,
+  getAllRefsWithIDs,
+  getMultipleRefsDataByID,
+} from "../../queries";
 
 const { CHARACTERS } = Collections;
 
-export async function getCharacters(
-  { size }: CharacterParams = {
-    size: 1000,
-  }
-) {
-  const allDocumentRefs: AllDocumentRefs = await faunaClient.query(
-    Paginate(Documents(Collection(CHARACTERS)), { size })
-  );
+export async function getCharacters({ size = 1000 }: CharacterParams = {}) {
+  const collection = CHARACTERS;
 
-  const documents: Array<T> = await faunaClient.query(
-    allDocumentRefs.data.map((ref) => Get(Ref(Collection(CHARACTERS), ref.id)))
-  );
+  const allDocumentRefs: AllDocumentRefs = await getAllRefsWithIDs({
+    collection,
+    size,
+  });
+
+  const documents: Array<T> = await getMultipleRefsDataByID({
+    collection,
+    allDocumentRefs,
+  });
 
   const documentsData = documents.map(
     (document: any): CharacterDocDataRef => document.data
@@ -38,11 +41,6 @@ export const getRandomCharacter = async () => {
 };
 
 export const createNewCharacter = async (character: CharactersBody) => {
-  const newCharacterResult = await faunaClient.query(
-    Create(Collection(CHARACTERS), {
-      data: character,
-    })
-  );
-
+  const newCharacterResult = await createNewDocument(character, CHARACTERS);
   return newCharacterResult;
 };
