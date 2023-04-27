@@ -22,7 +22,10 @@ export const getAllRefsWithIDs = async ({
   );
 };
 
-export const getSingleRefDataByID = async (collection: string, id: string) => {
+export const getSingleRefDataByID = async (
+  collection: string,
+  id: string
+): Promise<AllDocumentRefs> => {
   return await faunaClient.query(Get(Ref(Collection(collection), id)));
 };
 

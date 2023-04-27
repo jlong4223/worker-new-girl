@@ -10,6 +10,7 @@ import {
   createNewDocument,
   getAllRefsWithIDs,
   getMultipleRefsDataByID,
+  getSingleRefDataByID,
 } from "../../queries";
 
 const { CHARACTERS } = Collections;
@@ -33,11 +34,10 @@ export async function getCharacters({ size = 1000 }: CharacterParams = {}) {
   return documentsData;
 }
 
-export const getRandomCharacter = async () => {
-  const characters = await getCharacters();
-  const randomCharacter =
-    characters[Math.floor(Math.random() * characters.length)];
-  return randomCharacter;
+export const getCharacterByID = async (id: string) => {
+  const collection = CHARACTERS;
+  const document = await getSingleRefDataByID(collection, id);
+  return document.data;
 };
 
 export const createNewCharacter = async (character: CharactersBody) => {

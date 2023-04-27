@@ -1,6 +1,10 @@
 import { apiResponse } from "../../utils/routes";
-import { getCharacters } from "../../database/documents/characters/characters";
+import {
+  getCharacterByID,
+  getCharacters,
+} from "../../database/documents/characters/characters";
 import { queryNotSupportedRes } from "../../utils/responses";
+import { IRequest } from "itty-router";
 
 interface RouteOptions {
   query: {
@@ -23,5 +27,11 @@ export const getCharactersHandler = async ({ query }: RouteOptions) => {
   }
 
   const documentData = await getCharacters();
+  return apiResponse(documentData);
+};
+
+export const getCharactersByIDHandler = async ({ params }: any) => {
+  const { id } = params;
+  const documentData = await getCharacterByID(id);
   return apiResponse(documentData);
 };
