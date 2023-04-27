@@ -36,3 +36,10 @@ export interface CharacterParams {
   size?: number;
   random?: boolean;
 }
+
+// TODO need to update this when ready to add real data
+export interface CharactersBody {
+  name: string;
+  age: number;
+  weight: number;
+}

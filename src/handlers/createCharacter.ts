@@ -1,14 +1,9 @@
+import { IRequest } from "itty-router";
 import { createNewCharacter } from "../database/documents/characters/characters";
-import { CharactersBody } from "../middleware/verifyCharacters";
+import { CharactersBody } from "../database/documents/characters/interfaces";
 import { returnResponse } from "../utils/routes";
 
-interface CharacterResponse {
-  ref: { id: string };
-  ts: number;
-  data: {};
-}
-
-export const createCharacterHandler = async (request: any) => {
+export const createCharacterHandler = async (request: IRequest) => {
   const character: CharactersBody = request.character;
   const data: any = await createNewCharacter(character);
 

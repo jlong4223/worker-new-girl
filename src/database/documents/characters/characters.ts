@@ -7,6 +7,7 @@ import {
 } from "./interfaces";
 import { T } from "vitest/dist/types-e3c9754d";
 import { Collections } from "../../collections";
+import { CharactersBody } from "./interfaces";
 
 const { CHARACTERS } = Collections;
 
@@ -20,9 +21,7 @@ export async function getCharacters(
   );
 
   const documents: Array<T> = await faunaClient.query(
-    allDocumentRefs.data.map((ref: any) =>
-      Get(Ref(Collection(CHARACTERS), ref.id))
-    )
+    allDocumentRefs.data.map((ref) => Get(Ref(Collection(CHARACTERS), ref.id)))
   );
 
   const documentsData = documents.map(
@@ -38,7 +37,7 @@ export const getRandomCharacter = async () => {
   return randomCharacter;
 };
 
-export const createNewCharacter = async (character: any) => {
+export const createNewCharacter = async (character: CharactersBody) => {
   const newCharacterResult = await faunaClient.query(
     Create(Collection(CHARACTERS), {
       data: character,

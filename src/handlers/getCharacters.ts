@@ -1,8 +1,5 @@
 import { returnResponse } from "../utils/routes";
-import {
-  getCharacters,
-  getRandomCharacter,
-} from "../database/documents/characters/characters";
+import { getCharacters } from "../database/documents/characters/characters";
 import { queryNotSupportedRes } from "../utils/responses";
 
 interface RouteOptions {

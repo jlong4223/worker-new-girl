@@ -19,6 +19,7 @@ router.get("/", welcomeHander);
 // character routes
 router.get("/characters", getCharactersHandler);
 router.get("/characters/random", getRandomCharactersHandler);
+// TODO needs to add a check for isJared on the query
 // @ts-ignore
 router.post("/characters", verifyBody, createCharacterHandler);
 
