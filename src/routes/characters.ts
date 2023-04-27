@@ -3,7 +3,7 @@ import {
   getCharactersByIDHandler,
   getCharactersHandler,
 } from "../handlers/characters/getCharacters";
-import { getCharacterBodyValidation } from "../middleware/verifyCharacters";
+import { getCharacterBodyValidation } from "../middleware/characterValidation";
 import { createCharacterHandler } from "../handlers/characters/createCharacter";
 import { getRandomCharactersHandler } from "../handlers/characters/getRandomCharacters";
 
