@@ -2,7 +2,8 @@
 let returnobj;
 
 // routes for characters
-// GET /characters/main
+// GET /characters (all characters)
+// GET /characters/main (set an index for this fauna?)
 // GET /characters/recurring
 // GET /characters/:id/details
 // GET /showInfo
@@ -18,7 +19,9 @@ returnobj = [
     id: 1,
     name: "Nick Miller",
     age: 30,
+    occupation: "Bartender",
     image: "",
+    type: "main",
   },
 ];
 
