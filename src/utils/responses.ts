@@ -8,3 +8,12 @@ export const queryNotSupportedRes = (query: unknown): Response => {
   };
   return apiResponse(body, 400);
 };
+
+export const validationErrorRes = (error: string): Response => {
+  const body = {
+    routeNote: "Validation error",
+    status: 400,
+    error,
+  };
+  return apiResponse(body, 400);
+};

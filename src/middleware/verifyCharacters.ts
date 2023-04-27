@@ -1,24 +1,14 @@
-import { CharactersBody } from "../database/documents/characters/interfaces";
-import { apiResponse } from "../utils/routes";
+import Joi from "joi";
+import { getValidation } from "./joiHelpers";
 
-// an interface that extends the Request type
-// and adds a character property
-interface RequestWithCharacter extends Request {
-  character: CharactersBody;
-}
-
-export const verifyBody = async (request: RequestWithCharacter) => {
-  const body: CharactersBody = await request.json();
-  const { name, age, weight } = body;
-
-  if (!(name && age && weight)) {
-    return apiResponse(
-      {
-        message: "Missing property",
-      },
-      400
-    );
-  }
-
-  request.character = body;
+const characterBody = {
+  name: Joi.string().required(),
+  age: Joi.number().required(),
+  weight: Joi.number().required(),
 };
+
+const { name, age, weight } = characterBody;
+
+const characterSchema = Joi.object({ name, age, weight });
+
+export const getCharacterBodyValidation = getValidation(characterSchema);

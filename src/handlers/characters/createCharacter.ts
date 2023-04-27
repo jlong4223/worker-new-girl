@@ -4,8 +4,7 @@ import { CharactersBody } from "../../database/documents/characters/interfaces";
 import { apiResponse } from "../../utils/routes";
 
 export const createCharacterHandler = async (request: IRequest) => {
-  const character: CharactersBody = request.character;
-  // TODO try making a schema style thing like mongoose to set this up?  do i need it? maybe not
+  const character: CharactersBody = request.verifiedBody;
   const data: any = await createNewCharacter(character);
 
   return apiResponse({
