@@ -1,4 +1,4 @@
-import { returnResponse } from "./routes";
+import { apiResponse } from "./routes";
 
 export const queryNotSupportedRes = (query: unknown): Response => {
   const body = {
@@ -6,5 +6,5 @@ export const queryNotSupportedRes = (query: unknown): Response => {
     status: 400,
     queryProvided: query,
   };
-  return returnResponse(body, 400);
+  return apiResponse(body, 400);
 };

@@ -1,5 +1,5 @@
 import { CharactersBody } from "../database/documents/characters/interfaces";
-import { returnResponse } from "../utils/routes";
+import { apiResponse } from "../utils/routes";
 
 // an interface that extends the Request type
 // and adds a character property
@@ -12,7 +12,7 @@ export const verifyBody = async (request: RequestWithCharacter) => {
   const { name, age, weight } = body;
 
   if (!(name && age && weight)) {
-    return returnResponse(
+    return apiResponse(
       {
         message: "Missing property",
       },

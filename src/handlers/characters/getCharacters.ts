@@ -1,6 +1,6 @@
-import { returnResponse } from "../utils/routes";
-import { getCharacters } from "../database/documents/characters/characters";
-import { queryNotSupportedRes } from "../utils/responses";
+import { apiResponse } from "../../utils/routes";
+import { getCharacters } from "../../database/documents/characters/characters";
+import { queryNotSupportedRes } from "../../utils/responses";
 
 interface RouteOptions {
   query: {
@@ -17,11 +17,11 @@ export const getCharactersHandler = async ({ query }: RouteOptions) => {
     if (!!size) {
       const sizeNumber = Number(size);
       const documentData = await getCharacters({ size: sizeNumber });
-      return returnResponse(documentData);
+      return apiResponse(documentData);
     }
     return queryNotSupportedRes(query);
   }
 
   const documentData = await getCharacters();
-  return returnResponse(documentData);
+  return apiResponse(documentData);
 };

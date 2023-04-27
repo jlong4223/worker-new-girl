@@ -1,12 +1,12 @@
 import { createCors } from "itty-cors";
 import { Router } from "itty-router";
-import { returnResponse } from "./utils/routes";
+import { apiResponse } from "./utils/routes";
 import { welcomeHander } from "./handlers/welcome";
 import { notFoundHandler } from "./handlers/notFound";
-import { getCharactersHandler } from "./handlers/getCharacters";
-import { getRandomCharactersHandler } from "./handlers/getRandomCharacters";
+import { getCharactersHandler } from "./handlers/characters/getCharacters";
+import { getRandomCharactersHandler } from "./handlers/characters/getRandomCharacters";
 import { verifyBody } from "./middleware/verifyCharacters";
-import { createCharacterHandler } from "./handlers/createCharacter";
+import { createCharacterHandler } from "./handlers/characters/createCharacter";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -31,7 +31,7 @@ export const handleRequest = (request: Request) => {
 
 export const handleErrorRequest = (request: Request) => {
   const statusCode = 500;
-  return returnResponse(
+  return apiResponse(
     { message: "Theres been an error accessing the api" },
     statusCode
   );

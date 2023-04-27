@@ -1,7 +1,7 @@
 import { unstable_dev } from "wrangler";
 import type { UnstableDevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
-import { setStatusCode, returnResponse } from "../routes";
+import { setStatusCode, apiResponse } from "../routes";
 
 describe("Route utils", () => {
   let worker: UnstableDevWorker;
