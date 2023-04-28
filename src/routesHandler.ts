@@ -4,6 +4,7 @@ import { apiResponse } from "./utils/routes";
 import { welcomeHander } from "./handlers/welcome";
 import { notFoundHandler } from "./handlers/notFound";
 import { charactersRouter } from "./routes/characters";
+import { checkForTestRequest } from "./middleware/checkForTestRequest";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -11,6 +12,7 @@ const router = Router();
 
 // @ts-ignore
 router.all("*", preflight);
+router.all("*", checkForTestRequest);
 router.get("/", welcomeHander);
 router.all("/characters/*", charactersRouter.handle);
 router.all("*", notFoundHandler);
