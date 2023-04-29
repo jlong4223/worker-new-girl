@@ -5,7 +5,8 @@ import { apiResponse } from "../../utils/routes";
 
 export const createCharacterHandler = async (request: IRequest) => {
   const character: CharactersBody = request.verifiedBody;
-  const data: any = await createNewCharacter(character);
+
+  const data: any = await createNewCharacter(character, request.isTest);
 
   return apiResponse({
     message: "Character created",
