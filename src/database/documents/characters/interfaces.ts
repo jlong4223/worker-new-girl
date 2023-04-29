@@ -35,6 +35,7 @@ export interface CharacterDocDataRef {
 export interface CharacterParams {
   size?: number;
   random?: boolean;
+  isTest?: boolean;
 }
 
 // TODO need to update this when ready to add real data
