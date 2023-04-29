@@ -13,10 +13,13 @@ import {
   getSingleRefDataByID,
 } from "../../queries";
 
-const { CHARACTERS } = Collections;
+const { CHARACTERS, CHARACTERS_TEST } = Collections;
 
-export async function getCharacters({ size = 1000 }: CharacterParams = {}) {
-  const collection = CHARACTERS;
+export async function getCharacters({
+  size = 1000,
+  isTest,
+}: CharacterParams = {}) {
+  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
   const allDocumentRefs: AllDocumentRefs = await getAllRefsWithIDs({
     collection,
@@ -34,13 +37,17 @@ export async function getCharacters({ size = 1000 }: CharacterParams = {}) {
   return documentsData;
 }
 
-export const getCharacterByID = async (id: string) => {
-  const collection = CHARACTERS;
+export const getCharacterByID = async (id: string, isTest: boolean) => {
+  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const document = await getSingleRefDataByID(collection, id);
   return document.data;
 };
 
-export const createNewCharacter = async (character: CharactersBody) => {
-  const newCharacterResult = await createNewDocument(character, CHARACTERS);
+export const createNewCharacter = async (
+  character: CharactersBody,
+  isTest: boolean
+) => {
+  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
+  const newCharacterResult = await createNewDocument(character, collection);
   return newCharacterResult;
 };
