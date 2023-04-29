@@ -23,3 +23,9 @@ Learn more at https://developers.cloudflare.com/workers/
   - These may import document functions along with other logic
   - Direct database calls or queries should not be used here
   - functions mentioned in above bullet go in the database documents dir or queries
+
+## Testing against the DB locally
+
+- need to include `test-header = "true"` in the request headers for all POST/PUT/DELETE/PACTH requests
+- Test data is stored in the DB for 1 day before being automatically deleted
+- GET requests do not need the header
