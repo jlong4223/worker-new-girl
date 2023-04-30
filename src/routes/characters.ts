@@ -8,6 +8,7 @@ import { createCharacterHandler } from "../handlers/characters/createCharacter";
 import { getRandomCharactersHandler } from "../handlers/characters/getRandomCharacters";
 import { getMainCharactersHandler } from "../handlers/characters/getMainCharacters";
 import { getRecurringCharactersHandler } from "../handlers/characters/getRecurringCharacters";
+import { notFoundHandler } from "../handlers/notFound";
 
 export const charactersRouter = Router();
 
@@ -24,3 +25,5 @@ charactersRouter.post(
   getCharacterBodyValidation,
   createCharacterHandler
 );
+
+charactersRouter.all("*", notFoundHandler);
