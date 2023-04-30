@@ -4,42 +4,29 @@ import {
   CharacterParams,
   CharacterType,
 } from "./interfaces";
-import { T } from "vitest/dist/types-e3c9754d";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
 import {
   createNewDocument,
-  getAllRefsWithIDs,
+  getAllDocumentsRefsAndData,
   getCharacterTypeIndex,
-  getMultipleRefsDataByID,
   getSingleRefDataByID,
 } from "../../queries";
+import { setCharacterObj } from "../../../utils/conversions";
 
 const { CHARACTERS, CHARACTERS_TEST } = Collections;
 
-export async function getCharacters({
-  size = 1000,
-  isTest,
-}: CharacterParams = {}) {
+export async function getCharacters({ isTest }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
+  const documentData: AllDocumentRefs = await getAllDocumentsRefsAndData(
+    collection
+  );
 
-  const allDocumentRefs: AllDocumentRefs = await getAllRefsWithIDs({
-    collection,
-    size,
-  });
+  const characterData = documentData.data.map(
+    (character: any): CharacterDocDataRef => setCharacterObj(character)
+  );
 
-  const documents: Array<T> = await getMultipleRefsDataByID({
-    collection,
-    allDocumentRefs,
-  });
-
-  const documentsData = documents.map((document: any): CharacterDocDataRef => {
-    return {
-      ...document.data,
-      id: document.ref.id,
-    };
-  });
-  return documentsData;
+  return characterData;
 }
 
 export const getCharacterByID = async (id: string, isTest: boolean) => {
@@ -63,12 +50,7 @@ export const getCharacterType = async (type: CharacterType) => {
   );
 
   const characterDataAndID = charactersDataWithRef.data.map(
-    (character: any) => {
-      return {
-        ...character.data,
-        id: character.ref.id,
-      };
-    }
+    (characterData: any) => setCharacterObj(characterData)
   );
 
   return characterDataAndID;
