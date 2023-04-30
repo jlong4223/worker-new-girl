@@ -2,6 +2,7 @@ import {
   AllDocumentRefs,
   CharacterDocDataRef,
   CharacterParams,
+  CharacterType,
 } from "./interfaces";
 import { T } from "vitest/dist/types-e3c9754d";
 import { Collections } from "../../collections";
@@ -9,6 +10,7 @@ import { CharactersBody } from "./interfaces";
 import {
   createNewDocument,
   getAllRefsWithIDs,
+  getCharacterTypeIndex,
   getMultipleRefsDataByID,
   getSingleRefDataByID,
 } from "../../queries";
@@ -50,4 +52,21 @@ export const createNewCharacter = async (
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const newCharacterResult = await createNewDocument(character, collection);
   return newCharacterResult;
+};
+
+export const getCharacterType = async (type: CharacterType) => {
+  const charactersDataWithRef: AllDocumentRefs = await getCharacterTypeIndex(
+    type
+  );
+
+  const characterDataAndID = charactersDataWithRef.data.map(
+    (character: any) => {
+      return {
+        ...character.data,
+        id: character.ref.id,
+      };
+    }
+  );
+
+  return characterDataAndID;
 };

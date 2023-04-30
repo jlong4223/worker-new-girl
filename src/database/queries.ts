@@ -1,7 +1,20 @@
-import { Paginate, Documents, Collection, Ref, Get, Create } from "faunadb";
+import {
+  Paginate,
+  Documents,
+  Collection,
+  Ref,
+  Get,
+  Create,
+  Match,
+  Index,
+  Lambda,
+  Var,
+  Map,
+} from "faunadb";
 import { faunaClient } from "./connection";
 import { AllDocumentRefs } from "./documents/characters/interfaces";
 import { T } from "vitest/dist/types-e3c9754d";
+import { Indexes } from "./collections";
 
 interface GetAllRefsIDs {
   collection: string;
@@ -29,6 +42,7 @@ export const getSingleRefDataByID = async (
   return await faunaClient.query(Get(Ref(Collection(collection), id)));
 };
 
+// TODO can i use map query here?
 export const getMultipleRefsDataByID = async ({
   collection,
   allDocumentRefs,
@@ -46,4 +60,17 @@ export const createNewDocument = async (data: any, collection: string) => {
       data,
     })
   );
+};
+
+export const getCharacterTypeIndex = async (
+  type: string
+): Promise<AllDocumentRefs> => {
+  const mainCharacters: AllDocumentRefs = await faunaClient.query(
+    Map(
+      Paginate(Match(Index(Indexes.CHARACTER_TYPE), type)),
+      Lambda("X", Get(Var("X")))
+    )
+  );
+
+  return mainCharacters;
 };

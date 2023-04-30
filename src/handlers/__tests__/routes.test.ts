@@ -8,6 +8,7 @@ import {
   nickMillerDBid,
   testHeader,
 } from "../../test-helpers/testData";
+import { CharacterType } from "../../database/documents/characters/interfaces";
 
 describe("Routes", () => {
   let worker: UnstableDevWorker;
@@ -83,6 +84,42 @@ describe("Routes", () => {
       routeNote: "Validation error",
       status: 400,
     });
+  });
+
+  it("should get main characters", async () => {
+    const resp = await worker.fetch("/characters/main");
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: expect.any(String),
+          age: expect.any(Number),
+          occupation: expect.any(String),
+          image: expect.any(String),
+          type: CharacterType.MAIN,
+          id: expect.any(String),
+        }),
+      ])
+    );
+  });
+
+  it("should get recurring characters", async () => {
+    const resp = await worker.fetch("/characters/recurring");
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: expect.any(String),
+          age: expect.any(Number),
+          occupation: expect.any(String),
+          image: expect.any(String),
+          type: CharacterType.RECURRING,
+          id: expect.any(String),
+        }),
+      ])
+    );
   });
 
   it("should return the 404 response", async () => {
