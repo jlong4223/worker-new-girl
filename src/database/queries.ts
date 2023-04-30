@@ -42,7 +42,10 @@ export const getSingleRefDataByID = async (
   return await faunaClient.query(Get(Ref(Collection(collection), id)));
 };
 
-// TODO can i use map query here?
+/* 
+DEPRECATED: Use getAllDocumentsRefsAndData instead
+Just leaving hear as a reference as an alternative for how to get multiple refs data
+*/
 export const getMultipleRefsDataByID = async ({
   collection,
   allDocumentRefs,
@@ -51,6 +54,15 @@ export const getMultipleRefsDataByID = async ({
     allDocumentRefs.data.map((ref: any) =>
       Get(Ref(Collection(collection), ref.id))
     )
+  );
+};
+
+// NOTE: Paginate returns a default number of 64 documents
+export const getAllDocumentsRefsAndData = async (
+  collection: string
+): Promise<AllDocumentRefs> => {
+  return await faunaClient.query(
+    Map(Paginate(Documents(Collection(collection))), Lambda("X", Get(Var("X"))))
   );
 };
 
