@@ -55,6 +55,7 @@ returnobj = [
     dislikes: "Lawyers",
     finalQuote: "",
     ethnicity: "White",
+    actor: "Jake Johnson",
     // --- quotes could also be an array of quote ids?
     // --- these are 1 to many
     quotes: [

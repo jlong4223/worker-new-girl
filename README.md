@@ -14,6 +14,8 @@ Learn more at https://developers.cloudflare.com/workers/
 
 [FaunaDB CRUD Docs](https://docs.fauna.com/fauna/current/build/fql/crud?lang=javascript)
 
+[FaunaDB Index Docs Used](https://docs.fauna.com/fauna/current/learn/tutorials/fql/indexes/pagination?lang=javascript)
+
 ## Directory structure and use cases
 
 - `src/index.ts` - The entry point
