@@ -33,9 +33,12 @@ export async function getCharacters({
     allDocumentRefs,
   });
 
-  const documentsData = documents.map(
-    (document: any): CharacterDocDataRef => document.data
-  );
+  const documentsData = documents.map((document: any): CharacterDocDataRef => {
+    return {
+      ...document.data,
+      id: document.ref.id,
+    };
+  });
   return documentsData;
 }
 

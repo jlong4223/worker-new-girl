@@ -24,12 +24,7 @@ export interface RefObject {
 }
 
 export interface CharacterDocDataRef {
-  data: [
-    {
-      name: string;
-      details: string;
-    }
-  ];
+  data: [CharactersBodyWithID];
 }
 
 export interface CharacterParams {
@@ -45,6 +40,10 @@ export interface CharactersBody {
   occupation: string;
   image: string;
   type: string;
+}
+
+export interface CharactersBodyWithID extends CharactersBody {
+  id: string;
 }
 
 export enum CharacterType {

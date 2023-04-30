@@ -13,6 +13,15 @@ import { CharacterType } from "../../database/documents/characters/interfaces";
 describe("Routes", () => {
   let worker: UnstableDevWorker;
 
+  const characterObjResponse = {
+    id: expect.any(String),
+    name: expect.any(String),
+    type: expect.any(String),
+    image: expect.any(String),
+    occupation: expect.any(String),
+    age: expect.any(Number),
+  };
+
   beforeAll(async () => {
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
@@ -58,15 +67,7 @@ describe("Routes", () => {
     const resJSON = await resp.json();
 
     expect(resJSON).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          name: expect.any(String),
-          age: expect.any(Number),
-          occupation: expect.any(String),
-          image: expect.any(String),
-          type: expect.any(String),
-        }),
-      ])
+      expect.arrayContaining([expect.objectContaining(characterObjResponse)])
     );
   });
 
@@ -93,12 +94,8 @@ describe("Routes", () => {
     expect(resJSON).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          name: expect.any(String),
-          age: expect.any(Number),
-          occupation: expect.any(String),
-          image: expect.any(String),
+          ...characterObjResponse,
           type: CharacterType.MAIN,
-          id: expect.any(String),
         }),
       ])
     );
@@ -111,12 +108,8 @@ describe("Routes", () => {
     expect(resJSON).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          name: expect.any(String),
-          age: expect.any(Number),
-          occupation: expect.any(String),
-          image: expect.any(String),
+          ...characterObjResponse,
           type: CharacterType.RECURRING,
-          id: expect.any(String),
         }),
       ])
     );
