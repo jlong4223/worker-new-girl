@@ -46,3 +46,8 @@ export interface CharactersBody {
   image: string;
   type: string;
 }
+
+export enum CharacterType {
+  MAIN = "main",
+  RECURRING = "recurring",
+}
