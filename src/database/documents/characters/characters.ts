@@ -32,7 +32,7 @@ export async function getCharacters({ isTest }: CharacterParams = {}) {
 export const getCharacterByID = async (id: string, isTest: boolean) => {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const document = await getSingleRefDataByID(collection, id);
-  return document.data;
+  return setCharacterObj(document);
 };
 
 export const createNewCharacter = async (

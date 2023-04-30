@@ -25,4 +25,5 @@ export const nickMillerDBData = {
   image:
     "https://imgix.bustle.com/rehost/2016/9/13/b0008628-ab7e-4e5b-9276-8e9418fd879c.png?w=1200&h=630&fit=crop&crop=faces&fm=jpg",
   type: "main",
+  id: nickMillerDBid,
 };

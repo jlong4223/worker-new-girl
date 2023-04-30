@@ -59,7 +59,7 @@ describe("Routes", () => {
     const resp = await worker.fetch(`/characters/${nickMillerDBid}`);
 
     const resJSON = await resp.json();
-    expect(resJSON).toMatchObject(nickMillerDBData);
+    expect(resJSON).toStrictEqual(nickMillerDBData);
   });
 
   it("should return all characters", async () => {
@@ -91,7 +91,18 @@ describe("Routes", () => {
     const resp = await worker.fetch("/characters/main");
     const resJSON = await resp.json();
 
-    expect(resJSON).toStrictEqual(
+    // expect(resJSON).toStrictEqual(
+    //   expect.arrayContaining([
+    //     expect.objectContaining({
+    //       ...characterObjResponse,
+    //       type: CharacterType.MAIN,
+    //     }),
+    //   ])
+    // );
+
+    // needs to strictly make sure the object contains all the properties
+    // and not just some of them
+    expect(resJSON).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           ...characterObjResponse,
