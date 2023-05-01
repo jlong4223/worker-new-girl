@@ -10,6 +10,9 @@ import {
   Lambda,
   Var,
   Map,
+  Select,
+  Update,
+  Let,
 } from "faunadb";
 import { faunaClient } from "./connection";
 import { AllDocumentRefs } from "./documents/characters/interfaces";
@@ -26,6 +29,7 @@ interface GetAllRefIDData {
   allDocumentRefs: AllDocumentRefs;
 }
 
+/* DEPRECATED: Use getAllDocumentsRefsAndData instead */
 export const getAllRefsWithIDs = async ({
   collection,
   size,
@@ -35,16 +39,11 @@ export const getAllRefsWithIDs = async ({
   );
 };
 
-export const getSingleRefDataByID = async (
-  collection: string,
-  id: string
-): Promise<AllDocumentRefs> => {
-  return await faunaClient.query(Get(Ref(Collection(collection), id)));
-};
-
 /* 
 DEPRECATED: Use getAllDocumentsRefsAndData instead
-Just leaving hear as a reference as an alternative for how to get multiple refs data
+Just leaving here as a reference as an alternative for how to get multiple refs data
+Before you'd have to get all the refs (getAllRefsWithIDs), then map over them to get the data
+Now just use getAllDocumentsRefsAndData and get the data directly with the `Map` query
 */
 export const getMultipleRefsDataByID = async ({
   collection,
@@ -55,6 +54,13 @@ export const getMultipleRefsDataByID = async ({
       Get(Ref(Collection(collection), ref.id))
     )
   );
+};
+
+export const getSingleRefDataByID = async (
+  collection: string,
+  id: string
+): Promise<AllDocumentRefs> => {
+  return await faunaClient.query(Get(Ref(Collection(collection), id)));
 };
 
 // NOTE: Paginate returns a default number of 64 documents
@@ -71,6 +77,23 @@ export const createNewDocument = async (data: any, collection: string) => {
     Create(Collection(collection), {
       data,
     })
+  );
+};
+
+export const updateDocumentData = async (
+  id: string,
+  newData: any,
+  collection: string
+) => {
+  return await faunaClient.query(
+    Let(
+      {
+        documentRef: Ref(Collection(collection), id),
+        document: Get(Var("documentRef")),
+        currentData: Select(["data"], Var("document")),
+      },
+      Update(Var("documentRef"), { data: { ...newData } })
+    )
   );
 };
 
