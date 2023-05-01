@@ -122,4 +122,20 @@ describe("Character Routes", () => {
       name: "TESTED PATCH",
     });
   });
+
+  it("should not allow a new field in the patch request", async () => {
+    const resp = await worker.fetch(`/characters/${testManDBID}`, {
+      method: "PATCH",
+      headers: testHeader,
+      body: JSON.stringify({ newField: "TESTED FIELD" }),
+    });
+
+    const resJSON: any = await resp.json();
+
+    expect(resJSON).toStrictEqual({
+      error: '"newField" is not allowed',
+      routeNote: "Validation error",
+      status: 400,
+    });
+  });
 });

@@ -9,6 +9,7 @@ import { getRandomCharactersHandler } from "../handlers/characters/getRandomChar
 import { getMainCharactersHandler } from "../handlers/characters/getMainCharacters";
 import { getRecurringCharactersHandler } from "../handlers/characters/getRecurringCharacters";
 import { patchCharacterHandler } from "../handlers/characters/patchCharacter";
+import { getCharacterPatchValidation } from "../middleware/patchValidation";
 
 export const charactersRouter = Router({ base: "/characters" });
 
@@ -19,7 +20,12 @@ charactersRouter.get("/recurring", getRecurringCharactersHandler);
 charactersRouter.get("/:id", getCharactersByIDHandler);
 
 // TODO protect these routes
-charactersRouter.patch("/:id", patchCharacterHandler);
+charactersRouter.patch(
+  "/:id",
+  // @ts-ignore
+  getCharacterPatchValidation,
+  patchCharacterHandler
+);
 
 // TODO needs to add a check for isJared on the query
 charactersRouter.post(
