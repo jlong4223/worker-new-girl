@@ -23,6 +23,11 @@ export interface RefObject {
   };
 }
 
+export interface RefObjectAndData extends RefObject {
+  data: CharactersBody;
+  ts: number;
+}
+
 export interface CharacterDocDataRef {
   data: [CharactersBodyWithID];
 }

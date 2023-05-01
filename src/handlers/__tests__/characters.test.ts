@@ -7,6 +7,7 @@ import {
   nickMillerDBData,
   nickMillerDBid,
   testHeader,
+  testManDBID,
 } from "../../test-helpers/testData";
 import { CharacterType } from "../../database/documents/characters/interfaces";
 
@@ -105,5 +106,20 @@ describe("Character Routes", () => {
         }),
       ])
     );
+  });
+
+  it("should patch/update character data by id", async () => {
+    const resp = await worker.fetch(`/characters/${testManDBID}`, {
+      method: "PATCH",
+      headers: testHeader,
+      body: JSON.stringify({ name: "TESTED PATCH" }),
+    });
+
+    const resJSON: any = await resp.json();
+
+    expect(resJSON.data).toStrictEqual({
+      ...newCharacterBody,
+      name: "TESTED PATCH",
+    });
   });
 });

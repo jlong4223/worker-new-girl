@@ -17,6 +17,7 @@ export const failingCharacterBody = {
 };
 
 export const nickMillerDBid = "363193257409118285";
+export const testManDBID = "363377348784947273";
 export const generalFakeDBid = "123456789";
 
 export const nickMillerDBData = {
