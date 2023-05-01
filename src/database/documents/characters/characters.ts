@@ -11,6 +11,7 @@ import {
   getAllDocumentsRefsAndData,
   getCharacterTypeIndex,
   getSingleRefDataByID,
+  updateDocumentData,
 } from "../../queries";
 import { setCharacterObj } from "../../../utils/conversions";
 
@@ -54,4 +55,14 @@ export const getCharacterType = async (type: CharacterType) => {
   );
 
   return characterDataAndID;
+};
+
+export const updateCharacter = async (
+  id: string,
+  body: CharactersBody,
+  isTest: boolean
+) => {
+  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
+  const updatedCharacter = await updateDocumentData(id, body, collection);
+  return updatedCharacter;
 };
