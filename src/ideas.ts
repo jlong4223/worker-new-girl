@@ -19,7 +19,8 @@ returnobj = [
     id: 1,
     name: "Nick Miller",
     age: 30,
-    occupation: "Bartender",
+    occupation: "Bartender", // could be an array of occupations
+    occupations: ["Bartender", "Writer"],
     image: "",
     type: "main",
   },

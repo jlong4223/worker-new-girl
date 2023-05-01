@@ -12,6 +12,8 @@ Learn more at https://developers.cloudflare.com/workers/
 
 [Useful Guide to setting up a project with FaunaDB](https://fauna.com/blog/getting-started-with-fauna-and-cloudflare-workers)
 
+- has helpful details/explanation on the update query
+
 [FaunaDB CRUD Docs](https://docs.fauna.com/fauna/current/build/fql/crud?lang=javascript)
 
 [FaunaDB Index Docs Used](https://docs.fauna.com/fauna/current/learn/tutorials/fql/indexes/pagination?lang=javascript)
