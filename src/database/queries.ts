@@ -17,7 +17,6 @@ import {
 import { faunaClient } from "./connection";
 import { AllDocumentRefs } from "./documents/characters/interfaces";
 import { T } from "vitest/dist/types-e3c9754d";
-import { Indexes } from "./collections";
 
 interface GetAllRefsIDs {
   collection: string;
@@ -100,5 +99,14 @@ export const updateDocumentData = async (
       },
       Update(Var("documentRef"), { data: { ...newData } })
     )
+  );
+};
+
+export const getDataByIndex = async (
+  index: string,
+  indexTerm: string
+): Promise<AllDocumentRefs> => {
+  return await faunaClient.query(
+    Map(Paginate(Match(Index(index), indexTerm)), Lambda("X", Get(Var("X"))))
   );
 };
