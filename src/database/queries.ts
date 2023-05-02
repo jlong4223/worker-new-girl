@@ -65,10 +65,16 @@ export const getSingleRefDataByID = async (
 
 // NOTE: Paginate returns a default number of 64 documents
 export const getAllDocumentsRefsAndData = async (
-  collection: string
+  collection: string,
+  size?: number
 ): Promise<AllDocumentRefs> => {
+  const defaultSize = 1000;
+  const querySize = size ? size : defaultSize;
   return await faunaClient.query(
-    Map(Paginate(Documents(Collection(collection))), Lambda("X", Get(Var("X"))))
+    Map(
+      Paginate(Documents(Collection(collection)), { size: querySize }),
+      Lambda("X", Get(Var("X")))
+    )
   );
 };
 

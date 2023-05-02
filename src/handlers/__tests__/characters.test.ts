@@ -138,4 +138,20 @@ describe("Character Routes", () => {
       status: 400,
     });
   });
+
+  it("get extra details on a character by id", async () => {
+    const resp = await worker.fetch(`/characters/${testManDBID}/details`);
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual({
+      message: "Character details",
+    });
+  });
+
+  it('gets 3 characters using the "size" query param', async () => {
+    const resp = await worker.fetch("/characters?size=3");
+    const resJSON = await resp.json();
+
+    expect(resJSON).toHaveLength(3);
+  });
 });

@@ -17,10 +17,11 @@ import { setCharacterObj } from "../../../utils/conversions";
 
 const { CHARACTERS, CHARACTERS_TEST } = Collections;
 
-export async function getCharacters({ isTest }: CharacterParams = {}) {
+export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const documentData: AllDocumentRefs = await getAllDocumentsRefsAndData(
-    collection
+    collection,
+    size
   );
 
   const characterData = documentData.data.map(
