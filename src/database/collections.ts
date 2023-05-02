@@ -5,4 +5,5 @@ export enum Collections {
 
 export enum Indexes {
   CHARACTER_TYPE = "CharacterType",
+  CHARACTER_DETAILS = "CharacterRef",
 }
