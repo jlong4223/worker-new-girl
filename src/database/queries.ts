@@ -102,16 +102,3 @@ export const updateDocumentData = async (
     )
   );
 };
-
-export const getCharacterTypeIndex = async (
-  type: string
-): Promise<AllDocumentRefs> => {
-  const mainCharacters: AllDocumentRefs = await faunaClient.query(
-    Map(
-      Paginate(Match(Index(Indexes.CHARACTER_TYPE), type)),
-      Lambda("X", Get(Var("X")))
-    )
-  );
-
-  return mainCharacters;
-};
