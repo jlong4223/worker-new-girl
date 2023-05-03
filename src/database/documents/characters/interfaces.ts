@@ -3,6 +3,7 @@ export interface AllDocumentRefs {
     {
       id: string;
       ref: RefObject;
+      data?: object;
     }
   ];
 }
