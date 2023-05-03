@@ -9,11 +9,11 @@ import { CharactersBody } from "./interfaces";
 import {
   createNewDocument,
   getAllDocumentsRefsAndData,
-  getCharacterTypeIndex,
   getSingleRefDataByID,
   updateDocumentData,
 } from "../../queries";
 import { setCharacterObj } from "../../../utils/conversions";
+import { getCharacterTypeIndex } from "../../indexes";
 
 const { CHARACTERS, CHARACTERS_TEST } = Collections;
 
