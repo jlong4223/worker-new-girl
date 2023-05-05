@@ -55,6 +55,13 @@ export interface CharacterDetailsRes extends CharactersBodyWithID {
   details: any;
 }
 
+// TODO update this as i add more details
+export interface CharacterDetailsBody {
+  characterRef: string;
+  likes: string[];
+  actor: string;
+}
+
 export enum CharacterType {
   MAIN = "main",
   RECURRING = "recurring",
