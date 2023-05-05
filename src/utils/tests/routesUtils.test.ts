@@ -41,9 +41,9 @@ describe("Route utils", () => {
   });
 
   it("sets the character with details", async () => {
-    const details = { data: [{ data: { funky: "bunch", of: "details" } }] };
-
-    expect(setCharacterAndDetailsObj(nickMillerDBData, details)).toStrictEqual({
+    expect(
+      setCharacterAndDetailsObj(nickMillerDBData, characterDetails)
+    ).toStrictEqual({
       ...nickMillerDBData,
       details: characterDetails.data[0].data,
     });

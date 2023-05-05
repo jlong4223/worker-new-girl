@@ -5,15 +5,6 @@ import { describe, expect, it, beforeAll, afterAll } from "vitest";
 describe("General Routes", () => {
   let worker: UnstableDevWorker;
 
-  const characterObjResponse = {
-    id: expect.any(String),
-    name: expect.any(String),
-    type: expect.any(String),
-    image: expect.any(String),
-    occupation: expect.any(String),
-    age: expect.any(Number),
-  };
-
   beforeAll(async () => {
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
