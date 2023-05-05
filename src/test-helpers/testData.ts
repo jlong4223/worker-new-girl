@@ -34,3 +34,7 @@ export const characterToConvertForRes = {
   data: { ...newCharacterBody },
   ref: { id: generalFakeDBid },
 };
+
+export const characterDetails = {
+  data: [{ data: { funky: "bunch", of: "details" } }],
+};

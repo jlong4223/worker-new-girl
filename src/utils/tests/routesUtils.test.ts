@@ -3,11 +3,13 @@ import type { UnstableDevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
 import { setStatusCode } from "../routes";
 import {
+  characterDetails,
   characterToConvertForRes,
   generalFakeDBid,
   newCharacterBody,
+  nickMillerDBData,
 } from "../../test-helpers/testData";
-import { setCharacterObj } from "../conversions";
+import { setCharacterAndDetailsObj, setCharacterObj } from "../conversions";
 
 describe("Route utils", () => {
   let worker: UnstableDevWorker;
@@ -35,6 +37,22 @@ describe("Route utils", () => {
     expect(characterObjResponse).toStrictEqual({
       ...newCharacterBody,
       id: generalFakeDBid,
+    });
+  });
+
+  it("sets the character with details", async () => {
+    const details = { data: [{ data: { funky: "bunch", of: "details" } }] };
+
+    expect(setCharacterAndDetailsObj(nickMillerDBData, details)).toStrictEqual({
+      ...nickMillerDBData,
+      details: characterDetails.data[0].data,
+    });
+  });
+
+  it("sets the character with no details", async () => {
+    expect(setCharacterAndDetailsObj(nickMillerDBData, null)).toStrictEqual({
+      ...nickMillerDBData,
+      details: {},
     });
   });
 });
