@@ -39,7 +39,6 @@ export interface CharacterParams {
   isTest?: boolean;
 }
 
-// TODO need to update this when ready to add real data
 export interface CharactersBody {
   name: string;
   age: number;
@@ -50,6 +49,10 @@ export interface CharactersBody {
 
 export interface CharactersBodyWithID extends CharactersBody {
   id: string;
+}
+
+export interface CharacterDetailsRes extends CharactersBodyWithID {
+  details: any;
 }
 
 export enum CharacterType {

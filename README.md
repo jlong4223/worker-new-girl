@@ -18,6 +18,8 @@ Learn more at https://developers.cloudflare.com/workers/
 
 [FaunaDB Index Docs Used](https://docs.fauna.com/fauna/current/learn/tutorials/fql/indexes/pagination?lang=javascript)
 
+- may want to ref this when trying to ref other documents https://stackoverflow.com/questions/70689174/how-to-join-two-collections-in-fauna-db
+
 ## Directory structure and use cases
 
 - `src/index.ts` - The entry point
