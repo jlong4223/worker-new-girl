@@ -1,8 +1,10 @@
 import {
   AllDocumentRefs,
+  CharacterDetailsRes,
   CharacterDocDataRef,
   CharacterParams,
   CharacterType,
+  CharactersBodyWithID,
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
@@ -12,10 +14,16 @@ import {
   getSingleRefDataByID,
   updateDocumentData,
 } from "../../queries";
-import { setCharacterObj } from "../../../utils/conversions";
-import { getCharacterTypeIndex } from "../../indexes";
+import {
+  setCharacterAndDetailsObj,
+  setCharacterObj,
+} from "../../../utils/conversions";
+import {
+  getCharacterDetailsByRefIndex,
+  getCharacterTypeIndex,
+} from "../../indexes";
 
-const { CHARACTERS, CHARACTERS_TEST } = Collections;
+const { CHARACTERS, CHARACTERS_TEST, CHARACTERS_DETAILS } = Collections;
 
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
@@ -31,7 +39,10 @@ export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   return characterData;
 }
 
-export const getCharacterByID = async (id: string, isTest: boolean) => {
+export const getCharacterByID = async (
+  id: string,
+  isTest: boolean
+): Promise<CharactersBodyWithID> => {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const document = await getSingleRefDataByID(collection, id);
   return setCharacterObj(document);
@@ -66,4 +77,14 @@ export const updateCharacter = async (
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
   const updatedCharacter = await updateDocumentData(id, body, collection);
   return updatedCharacter;
+};
+
+export const getCharacterDetails = async (
+  id: string,
+  isTest: boolean
+): Promise<CharacterDetailsRes> => {
+  const character = await getCharacterByID(id, isTest);
+  const details = await getCharacterDetailsByRefIndex(id);
+
+  return setCharacterAndDetailsObj(character, details);
 };
