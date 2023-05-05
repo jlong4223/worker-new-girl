@@ -23,6 +23,11 @@ describe("Character Routes", () => {
     age: expect.any(Number),
   };
 
+  const characterDetailsObjResponse = {
+    ...characterObjResponse,
+    details: expect.any(Object),
+  };
+
   beforeAll(async () => {
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
@@ -140,11 +145,23 @@ describe("Character Routes", () => {
   });
 
   it("get extra details on a character by id", async () => {
-    const resp = await worker.fetch(`/characters/${testManDBID}/details`);
+    const resp = await worker.fetch(`/characters/${nickMillerDBid}/details`);
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual(characterDetailsObjResponse);
+  });
+
+  it("gets no details on a character when empty", async () => {
+    const resp = await worker.fetch(`/characters/${testManDBID}/details`, {
+      method: "GET",
+      headers: testHeader,
+    });
+
     const resJSON = await resp.json();
 
     expect(resJSON).toStrictEqual({
-      message: "Character details",
+      ...characterObjResponse,
+      details: {},
     });
   });
 
