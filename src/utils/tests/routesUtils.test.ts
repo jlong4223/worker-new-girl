@@ -9,7 +9,10 @@ import {
   newCharacterBody,
   nickMillerDBData,
 } from "../../test-helpers/testData";
-import { setCharacterAndDetailsObj, setCharacterObj } from "../conversions";
+import {
+  setCharacterAndDetailsObjForRes,
+  setCharacterObj,
+} from "../conversions";
 
 describe("Route utils", () => {
   let worker: UnstableDevWorker;
@@ -42,7 +45,7 @@ describe("Route utils", () => {
 
   it("sets the character with details", async () => {
     expect(
-      setCharacterAndDetailsObj(nickMillerDBData, characterDetails)
+      setCharacterAndDetailsObjForRes(nickMillerDBData, characterDetails)
     ).toStrictEqual({
       ...nickMillerDBData,
       details: characterDetails.data[0].data,
@@ -50,7 +53,9 @@ describe("Route utils", () => {
   });
 
   it("sets the character with no details", async () => {
-    expect(setCharacterAndDetailsObj(nickMillerDBData, null)).toStrictEqual({
+    expect(
+      setCharacterAndDetailsObjForRes(nickMillerDBData, null)
+    ).toStrictEqual({
       ...nickMillerDBData,
       details: {},
     });
