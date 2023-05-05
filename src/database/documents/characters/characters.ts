@@ -22,6 +22,7 @@ import {
   getCharacterDetailsByRefIndex,
   getCharacterTypeIndex,
 } from "../../indexes";
+import { apiResponse } from "../../../utils/routes";
 
 const { CHARACTERS, CHARACTERS_TEST, CHARACTERS_DETAILS } = Collections;
 
@@ -82,9 +83,13 @@ export const updateCharacter = async (
 export const getCharacterDetails = async (
   id: string,
   isTest: boolean
-): Promise<CharacterDetailsRes> => {
-  const character = await getCharacterByID(id, isTest);
-  const details = await getCharacterDetailsByRefIndex(id);
+): Promise<CharacterDetailsRes | unknown> => {
+  try {
+    const character = await getCharacterByID(id, isTest);
+    const details = await getCharacterDetailsByRefIndex(id);
 
-  return setCharacterAndDetailsObj(character, details);
+    return setCharacterAndDetailsObj(character, details);
+  } catch (err) {
+    return apiResponse(err);
+  }
 };
