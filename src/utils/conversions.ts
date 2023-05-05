@@ -10,7 +10,7 @@ export const setCharacterObj = (character: any) => {
   };
 };
 
-export const setCharacterAndDetailsObj = (
+export const setCharacterAndDetailsObjForRes = (
   character: CharactersBodyWithID,
   details: any
 ): CharacterDetailsRes => {
@@ -18,4 +18,19 @@ export const setCharacterAndDetailsObj = (
     ...character,
     details: details?.data[0]?.data ?? {},
   };
+};
+
+export const setCharacterDetailsForNewDoc = ({
+  id,
+  body,
+}: {
+  id: string;
+  body: any;
+}) => {
+  const newCharacterDetailsObj = {
+    characterRef: id,
+    ...body,
+  };
+
+  return { newCharacterDetailsObj };
 };
