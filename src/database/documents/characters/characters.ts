@@ -15,7 +15,7 @@ import {
   updateDocumentData,
 } from "../../queries";
 import {
-  setCharacterAndDetailsObj,
+  setCharacterAndDetailsObjForRes,
   setCharacterObj,
 } from "../../../utils/conversions";
 import {
@@ -24,7 +24,12 @@ import {
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
 
-const { CHARACTERS, CHARACTERS_TEST, CHARACTERS_DETAILS } = Collections;
+const {
+  CHARACTERS,
+  CHARACTERS_TEST,
+  CHARACTERS_DETAILS,
+  CHARACTERS_TEST_DETAILS,
+} = Collections;
 
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
@@ -88,8 +93,30 @@ export const getCharacterDetails = async (
     const character = await getCharacterByID(id, isTest);
     const details = await getCharacterDetailsByRefIndex(id);
 
-    return setCharacterAndDetailsObj(character, details);
+    return setCharacterAndDetailsObjForRes(character, details);
   } catch (err) {
     return apiResponse(err);
   }
+};
+
+export const createCharacterDetails = async (
+  details: CharacterDetailsRes,
+  isTest: boolean
+) => {
+  const collection = isTest ? CHARACTERS_TEST_DETAILS : CHARACTERS_DETAILS;
+  const newDetails = await createNewDocument(details, collection);
+  return newDetails;
+};
+
+export const updateCharacterDetails = async (
+  characterId: string,
+  body: any,
+  isTest: boolean
+) => {
+  const collection = isTest ? CHARACTERS_TEST_DETAILS : CHARACTERS_DETAILS;
+  const details = await getCharacterDetailsByRefIndex(characterId);
+  const detailsId = details.data[0].ref.value.id;
+
+  const updatedDetails = await updateDocumentData(detailsId, body, collection);
+  return updatedDetails;
 };
