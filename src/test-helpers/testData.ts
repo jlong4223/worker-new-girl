@@ -36,5 +36,10 @@ export const characterToConvertForRes = {
 };
 
 export const characterDetails = {
-  data: [{ data: { funky: "bunch", of: "details" } }],
+  data: [
+    {
+      data: { funky: "bunch", of: "details" },
+      ref: { value: { id: "123456789" } },
+    },
+  ],
 };

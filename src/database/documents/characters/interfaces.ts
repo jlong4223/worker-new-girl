@@ -9,6 +9,7 @@ export interface AllDocumentRefs {
 }
 
 export interface RefObject {
+  [x: string]: any;
   "@ref": {
     id: string;
     collection: {
