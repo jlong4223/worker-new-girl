@@ -12,6 +12,7 @@ import { patchCharacterHandler } from "../handlers/characters/patchCharacter";
 import { getCharacterPatchValidation } from "../middleware/patchValidation";
 import { getDetailedCharacterHandler } from "../handlers/characters/getDetailedCharacter";
 import { createCharacterDetailsHandler } from "../handlers/characters/createCharacterDetails";
+import { patchCharacterDetailsHandler } from "../handlers/characters/patchCharacterDetails";
 
 export const charactersRouter = Router({ base: "/characters" });
 
@@ -29,6 +30,8 @@ charactersRouter.patch(
   getCharacterPatchValidation,
   patchCharacterHandler
 );
+
+charactersRouter.patch("/:id/details", patchCharacterDetailsHandler);
 
 // TODO needs to add a check for isJared on the query
 charactersRouter.post(
