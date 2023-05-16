@@ -14,9 +14,15 @@ export const setCharacterAndDetailsObjForRes = (
   character: CharactersBodyWithID,
   details: any
 ): CharacterDetailsRes => {
+  const detailsData = details?.data[0]?.data ?? {};
+  const detailsId = details?.data[0]?.ref.value.id;
+
   return {
     ...character,
-    details: details?.data[0]?.data ?? {},
+    details: {
+      ...detailsData,
+      ...(detailsId && { id: detailsId }),
+    },
   };
 };
 

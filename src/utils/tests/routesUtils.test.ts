@@ -48,7 +48,10 @@ describe("Route utils", () => {
       setCharacterAndDetailsObjForRes(nickMillerDBData, characterDetails)
     ).toStrictEqual({
       ...nickMillerDBData,
-      details: characterDetails.data[0].data,
+      details: {
+        ...characterDetails.data[0].data,
+        id: characterDetails.data[0].ref.value.id,
+      },
     });
   });
 
