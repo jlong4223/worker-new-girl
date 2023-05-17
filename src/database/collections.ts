@@ -3,6 +3,7 @@ export enum Collections {
   CHARACTERS_TEST = "CharactersTests",
   CHARACTERS_DETAILS = "CharacterDetails",
   CHARACTERS_TEST_DETAILS = "CharacterDetailsTests",
+  QUOTES = "Quotes",
 }
 
 export enum Indexes {
