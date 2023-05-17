@@ -8,6 +8,6 @@ addEventListener("fetch", (event: FetchEvent) => {
   try {
     event.respondWith(handleRequest(event.request));
   } catch (e: any | unknown) {
-    event.respondWith(handleErrorRequest(event.request));
+    event.respondWith(handleErrorRequest(event.request, e));
   }
 });

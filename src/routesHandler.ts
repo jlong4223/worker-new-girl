@@ -18,15 +18,19 @@ router.all("/characters/*", charactersRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
-  return router.handle(request).then(corsify).catch(handleErrorRequest);
+  return router
+    .handle(request)
+    .then(corsify)
+    .catch((e) => handleErrorRequest(request, e));
 };
 
-export const handleErrorRequest = (request: Request) => {
+export const handleErrorRequest = (request: Request, e: Error) => {
   const statusCode = 500;
   return apiResponse(
     {
       message: "Theres been an error accessing the api.",
       note: "This route may not exist or is currently under maintenance.",
+      error: e.message,
     },
     statusCode
   );
