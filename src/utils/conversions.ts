@@ -40,3 +40,10 @@ export const setCharacterDetailsForNewDoc = ({
 
   return { newCharacterDetailsObj };
 };
+
+export const setQuoteObj = (quote: any) => {
+  return {
+    ...quote.data,
+    id: quote.ref.id,
+  };
+};
