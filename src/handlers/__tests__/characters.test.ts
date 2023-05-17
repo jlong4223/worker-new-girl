@@ -19,7 +19,7 @@ describe("Character Routes", () => {
     name: expect.any(String),
     type: expect.any(String),
     image: expect.any(String),
-    occupation: expect.any(String),
+    occupations: expect.any(Array),
     age: expect.any(Number),
   };
 
