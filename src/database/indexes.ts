@@ -1,6 +1,6 @@
 import { AllDocumentRefs } from "./documents/characters/interfaces";
 import { Indexes } from "./collections";
-import { getDataByIndex } from "./queries";
+import { getDataByIndex, getDataByIndexWithValueSet } from "./queries";
 
 export const getCharacterTypeIndex = async (
   type: string
@@ -18,4 +18,14 @@ export const getCharacterDetailsByRefIndex = async (
   );
 
   return characterDetails;
+};
+
+export const getQuotesByCharacterIdIndex = async (
+  characterID: string
+): Promise<AllDocumentRefs> => {
+  const quotes = await getDataByIndexWithValueSet(
+    Indexes.CHARACTER_ID,
+    characterID
+  );
+  return quotes;
 };
