@@ -10,4 +10,5 @@ export enum Indexes {
   CHARACTER_TYPE = "CharacterType",
   CHARACTER_DETAILS = "CharacterRef",
   CHARACTER_DETAILS_TEST = "CharacterRefTest",
+  CHARACTER_ID = "CharacterId",
 }
