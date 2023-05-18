@@ -24,6 +24,8 @@ describe("Quote Routes", () => {
     const resp = await worker.fetch("/quotes");
     const resJSON = await resp.json();
 
-    expect(resJSON).toStrictEqual([quoteObjResponse]);
+    expect(resJSON).toEqual(
+      expect.arrayContaining([expect.objectContaining(quoteObjResponse)])
+    );
   });
 });

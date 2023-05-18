@@ -3,7 +3,7 @@ export const testHeader = { "test-header": "true" };
 export const newCharacterBody = {
   name: "Testy Test Man",
   age: 99,
-  occupation: "Test",
+  occupations: ["Test"],
   image: "https://test.com",
   type: "main",
 };
@@ -11,7 +11,7 @@ export const newCharacterBody = {
 export const failingCharacterBody = {
   name: "Testy Test Man",
   age: 99,
-  occupation: "Test",
+  occupations: ["Test"],
   image: "https://test.com",
   type: "",
 };
