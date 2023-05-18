@@ -110,3 +110,10 @@ export const getDataByIndex = async (
     Map(Paginate(Match(Index(index), indexTerm)), Lambda("X", Get(Var("X"))))
   );
 };
+
+export const getDataByIndexWithValueSet = async (
+  index: string,
+  indexTerm: string
+): Promise<any> => {
+  return await faunaClient.query(Paginate(Match(Index(index), indexTerm)));
+};
