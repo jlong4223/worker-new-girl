@@ -13,6 +13,7 @@ import { getCharacterPatchValidation } from "../middleware/patchValidation";
 import { getDetailedCharacterHandler } from "../handlers/characters/getDetailedCharacter";
 import { createCharacterDetailsHandler } from "../handlers/characters/createCharacterDetails";
 import { patchCharacterDetailsHandler } from "../handlers/characters/patchCharacterDetails";
+import { getCharacterQuotesHandler } from "../handlers/characters/getCharacterQuotes";
 
 export const charactersRouter = Router({ base: "/characters" });
 
@@ -22,6 +23,7 @@ charactersRouter.get("/main", getMainCharactersHandler);
 charactersRouter.get("/recurring", getRecurringCharactersHandler);
 charactersRouter.get("/:id", getCharactersByIDHandler);
 charactersRouter.get("/:id/details", getDetailedCharacterHandler);
+charactersRouter.get("/:id/quotes", getCharacterQuotesHandler);
 
 // TODO protect these routes
 charactersRouter.patch(

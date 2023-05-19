@@ -23,6 +23,7 @@ import {
   getCharacterTypeIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
+import { getQuotesByCharacterId } from "../quotes/quotes";
 
 const {
   CHARACTERS,
@@ -94,6 +95,22 @@ export const getCharacterDetails = async (
     const details = await getCharacterDetailsByRefIndex(id);
 
     return setCharacterAndDetailsObjForRes(character, details);
+  } catch (err) {
+    return apiResponse(err);
+  }
+};
+
+export const getCharacterQuotes = async (id: string, isTest: boolean) => {
+  try {
+    const character = await getCharacterByID(id, isTest);
+    const quotes = await getQuotesByCharacterId(id);
+
+    const characterWithQuotes = {
+      ...character,
+      quotes: [...quotes.data],
+    };
+
+    return characterWithQuotes;
   } catch (err) {
     return apiResponse(err);
   }
