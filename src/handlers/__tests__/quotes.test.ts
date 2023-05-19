@@ -1,5 +1,6 @@
 import { expect, beforeAll, afterAll, describe, it } from "vitest";
 import { UnstableDevWorker, unstable_dev } from "wrangler";
+import { nickMillerDBid } from "../../test-helpers/testData";
 
 describe("Quote Routes", () => {
   let worker: UnstableDevWorker;
@@ -20,6 +21,10 @@ describe("Quote Routes", () => {
     characterId: expect.any(String),
   };
 
+  const characterQuotesResponse = {
+    quotes: expect.arrayContaining([expect.any(String)]),
+  };
+
   it("should get all quotes", async () => {
     const resp = await worker.fetch("/quotes");
     const resJSON = await resp.json();
@@ -27,5 +32,12 @@ describe("Quote Routes", () => {
     expect(resJSON).toEqual(
       expect.arrayContaining([expect.objectContaining(quoteObjResponse)])
     );
+  });
+
+  it("should get Nick Millers quotes by the character id", async () => {
+    const resp = await worker.fetch(`/quotes/${nickMillerDBid}`);
+    const resJSON = await resp.json();
+
+    expect(resJSON).toEqual(characterQuotesResponse);
   });
 });
