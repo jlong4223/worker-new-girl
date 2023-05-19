@@ -15,15 +15,16 @@ import {
   updateDocumentData,
 } from "../../queries";
 import {
+  setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
   setCharacterObj,
 } from "../../../utils/conversions";
 import {
   getCharacterDetailsByRefIndex,
   getCharacterTypeIndex,
+  getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
-import { getQuotesByCharacterId } from "../quotes/quotes";
 
 const {
   CHARACTERS,
@@ -103,7 +104,7 @@ export const getCharacterDetails = async (
 export const getCharacterQuotes = async (id: string, isTest: boolean) => {
   try {
     const character = await getCharacterByID(id, isTest);
-    const quotes = await getQuotesByCharacterId(id);
+    const quotes = await getQuotesByCharacterIdIndex(id);
 
     const characterWithQuotes = {
       ...character,
@@ -111,6 +112,18 @@ export const getCharacterQuotes = async (id: string, isTest: boolean) => {
     };
 
     return characterWithQuotes;
+  } catch (err) {
+    return apiResponse(err);
+  }
+};
+
+export const getCharacterAllData = async (id: string, isTest: boolean) => {
+  try {
+    const character = await getCharacterByID(id, isTest);
+    const details = await getCharacterDetailsByRefIndex(id);
+    const quotes = await getQuotesByCharacterIdIndex(id);
+
+    return setCharacterAllDataObjForRes(character, details, quotes);
   } catch (err) {
     return apiResponse(err);
   }

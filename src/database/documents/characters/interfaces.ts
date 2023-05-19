@@ -56,6 +56,10 @@ export interface CharacterDetailsRes extends CharactersBodyWithID {
   details: any;
 }
 
+export interface CharacterAllData extends CharacterDetailsRes {
+  quotes: any;
+}
+
 // TODO update this as i add more details
 export interface CharacterDetailsBody {
   characterRef: string;

@@ -1,4 +1,5 @@
 import {
+  CharacterAllData,
   CharacterDetailsRes,
   CharactersBodyWithID,
 } from "../database/documents/characters/interfaces";
@@ -23,6 +24,24 @@ export const setCharacterAndDetailsObjForRes = (
       ...detailsData,
       ...(detailsId && { id: detailsId }),
     },
+  };
+};
+
+export const setCharacterAllDataObjForRes = (
+  character: CharactersBodyWithID,
+  details: any,
+  quotes: any
+): CharacterAllData => {
+  const detailsData = details?.data[0]?.data ?? {};
+  const detailsId = details?.data[0]?.ref.value.id;
+
+  return {
+    ...character,
+    details: {
+      ...detailsData,
+      ...(detailsId && { id: detailsId }),
+    },
+    quotes: [...quotes.data],
   };
 };
 

@@ -14,6 +14,7 @@ import { getDetailedCharacterHandler } from "../handlers/characters/getDetailedC
 import { createCharacterDetailsHandler } from "../handlers/characters/createCharacterDetails";
 import { patchCharacterDetailsHandler } from "../handlers/characters/patchCharacterDetails";
 import { getCharacterQuotesHandler } from "../handlers/characters/getCharacterQuotes";
+import { getCharacterAllDataHandler } from "../handlers/characters/getCharacterAllData";
 
 export const charactersRouter = Router({ base: "/characters" });
 
@@ -24,6 +25,7 @@ charactersRouter.get("/recurring", getRecurringCharactersHandler);
 charactersRouter.get("/:id", getCharactersByIDHandler);
 charactersRouter.get("/:id/details", getDetailedCharacterHandler);
 charactersRouter.get("/:id/quotes", getCharacterQuotesHandler);
+charactersRouter.get("/:id/alldata", getCharacterAllDataHandler);
 
 // TODO protect these routes
 charactersRouter.patch(
