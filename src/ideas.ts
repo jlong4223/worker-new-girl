@@ -44,7 +44,7 @@ returnobj = [
 ];
 
 // characters/:id/
-
+// this is basically the /characters/:id/alldata route
 returnobj = [
   {
     id: 1,
