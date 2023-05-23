@@ -4,6 +4,7 @@ export enum Collections {
   CHARACTERS_DETAILS = "CharacterDetails",
   CHARACTERS_TEST_DETAILS = "CharacterDetailsTests",
   QUOTES = "Quotes",
+  SHOW_INFO = "ShowInfo",
 }
 
 export enum Indexes {
