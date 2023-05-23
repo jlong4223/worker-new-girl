@@ -5,7 +5,7 @@ export const welcomeHander = async () => {
   // @ts-ignore
   const showInfo = await getShowInfo(SHOW_INFO_ID);
   const body = {
-    message: "Welcome to the API",
+    message: "Welcome to the New Girl API",
     ...showInfo.data,
   };
   return apiResponse(body);
