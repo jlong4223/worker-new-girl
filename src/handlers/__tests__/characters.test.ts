@@ -46,10 +46,10 @@ describe("Character Routes", () => {
     });
 
     const resJSON = await resp.json();
-
-    expect(resJSON).toMatchObject({
+    expect(resJSON).toStrictEqual({
       message: "Character created",
       newCharacterID: expect.any(String),
+      characterName: newCharacterBody.name,
     });
   });
 

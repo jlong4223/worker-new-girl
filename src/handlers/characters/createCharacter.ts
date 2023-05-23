@@ -11,5 +11,6 @@ export const createCharacterHandler = async (request: IRequest) => {
   return apiResponse({
     message: "Character created",
     newCharacterID: data.ref.id,
+    characterName: data.data.name,
   });
 };
