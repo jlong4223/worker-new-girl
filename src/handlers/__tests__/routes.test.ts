@@ -30,8 +30,8 @@ describe("General Routes", () => {
         rottenTomatoes: [
           {
             season: 1,
-            tomatoMeter: 87,
-            audienceScore: 86,
+            tomatoMeter: "87%",
+            audienceScore: "86%",
           },
           {
             season: 2,
