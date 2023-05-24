@@ -12,7 +12,8 @@
     "start": "wrangler dev",
     "dev": "wrangler dev src/index.ts --local",
     "deploy": "wrangler publish",
-    "test": "vitest"
+    "test": "vitest",
+    "deploy-dev": "wrangler publish --env dev"
   },
   "dependencies": {
     "faunadb": "^4.8.0",

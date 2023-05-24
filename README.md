@@ -35,3 +35,7 @@ Learn more at https://developers.cloudflare.com/workers/
 - need to include `test-header = "true"` in the request headers for all POST/PUT/DELETE/PACTH requests
 - Test data is stored in the DB for 1 day before being automatically deleted
 - GET requests do not need the header
+
+## package.json Scripts
+
+- deploy: this is for production deployment
