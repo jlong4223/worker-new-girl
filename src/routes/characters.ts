@@ -1,8 +1,6 @@
 import { Router } from "itty-router";
-import {
-  getCharactersByIDHandler,
-  getCharactersHandler,
-} from "../handlers/characters/getCharacters";
+import { getCharactersHandler } from "../handlers/characters/getCharacters";
+import { getCharactersByIDHandler } from "../handlers/characters/getCharactersByIDHandler";
 import { getCharacterBodyValidation } from "../middleware/characterValidation";
 import { createCharacterHandler } from "../handlers/characters/createCharacter";
 import { getRandomCharactersHandler } from "../handlers/characters/getRandomCharacters";
