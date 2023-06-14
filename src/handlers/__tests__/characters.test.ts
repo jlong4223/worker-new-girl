@@ -23,9 +23,16 @@ describe("Character Routes", () => {
     age: expect.any(Number),
   };
 
+  const detailsObj = {
+    likes: expect.any(String),
+    actor: expect.any(String),
+    // expect array of strings
+    nicknames: Array(expect.any(String)),
+  };
+
   const characterDetailsObjResponse = {
     ...characterObjResponse,
-    details: expect.any(Object),
+    details: expect.any(Object), // TODO plug the details obj in here when done
   };
 
   beforeAll(async () => {

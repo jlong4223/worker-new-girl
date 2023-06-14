@@ -117,3 +117,7 @@ export const getDataByIndexWithValueSet = async (
 ): Promise<any> => {
   return await faunaClient.query(Paginate(Match(Index(index), indexTerm)));
 };
+
+/* used this resource for setting up the index query
+https://docs.fauna.com/fauna/current/build/fql/indexes/?lang=javascript#collection_indexes
+*/
