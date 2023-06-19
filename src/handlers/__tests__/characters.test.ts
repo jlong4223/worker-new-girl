@@ -178,4 +178,17 @@ describe("Character Routes", () => {
 
     expect(resJSON).toHaveLength(3);
   });
+
+  it("should not allow a query that is not supported recieve data", async () => {
+    const resp = await worker.fetch("/characters?fakeQuery=3");
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual({
+      queryProvided: {
+        fakeQuery: "3",
+      },
+      routeNote: "Query not supported",
+      status: 400,
+    });
+  });
 });
