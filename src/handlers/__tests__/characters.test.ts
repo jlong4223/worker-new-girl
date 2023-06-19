@@ -180,7 +180,8 @@ describe("Character Routes", () => {
   });
 
   it("should not allow a query that is not supported recieve data", async () => {
-    const resp = await worker.fetch("/characters?fakeQuery=3");
+    const badQuery = "fakeQuery=3";
+    const resp = await worker.fetch(`/characters?${badQuery}`);
     const resJSON = await resp.json();
 
     expect(resJSON).toStrictEqual({
