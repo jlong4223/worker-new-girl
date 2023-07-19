@@ -1,7 +1,7 @@
 import { unstable_dev } from "wrangler";
 import type { UnstableDevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
-import { setStatusCode } from "../routes";
+import { setStatusCodeWithHeaders } from "../routes";
 import {
   characterDetails,
   characterToConvertForRes,
@@ -28,11 +28,11 @@ describe("Route utils", () => {
   });
 
   it("should set the default status code to 200", () => {
-    expect(setStatusCode()).toMatchObject({ status: 200 });
+    expect(setStatusCodeWithHeaders()).toMatchObject({ status: 200 });
   });
 
   it("should set the status code to 404", () => {
-    expect(setStatusCode(404)).toMatchObject({ status: 404 });
+    expect(setStatusCodeWithHeaders(404)).toMatchObject({ status: 404 });
   });
 
   it("should set the proper character object for the response", () => {
