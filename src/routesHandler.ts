@@ -33,6 +33,12 @@ export const handleErrorRequest = (request: Request, e: Error) => {
       message: "Theres been an error accessing the api.",
       note: "This route may not exist or is currently under maintenance.",
       error: e.message,
+      errorDetails: e.stack,
+      request: {
+        url: request.url,
+        method: request.method,
+        headers: request.headers,
+      },
     },
     statusCode
   );

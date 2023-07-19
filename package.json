@@ -5,6 +5,7 @@
     "start": "wrangler dev",
     "dev": "wrangler dev src/index.ts --local",
     "deploy": "wrangler publish",
+    "push:deploy": "git push origin master && npm run deploy",
     "test": "vitest",
     "test:cov": "vitest --coverage",
     "deploy-dev": "wrangler publish --env dev"
