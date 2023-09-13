@@ -3,6 +3,7 @@ import type { UnstableDevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
 import {
   failingCharacterBody,
+  failingCharacterIdMessage,
   newCharacterBody,
   nickMillerDBData,
   nickMillerDBid,
@@ -65,6 +66,21 @@ describe("Character Routes", () => {
 
     const resJSON = await resp.json();
     expect(resJSON).toStrictEqual(nickMillerDBData);
+  });
+
+  it("should return an error message if the character id is not found", async () => {
+    const resp = await worker.fetch(`/characters/1234567890`);
+
+    const resJSON = await resp.json();
+    // @ts-ignore
+    expect(resJSON.error.requestResult.statusCode).toStrictEqual(
+      failingCharacterIdMessage.error.requestResult.statusCode
+    );
+
+    // @ts-ignore
+    expect(resJSON.customMessage).toStrictEqual(
+      failingCharacterIdMessage.customMessage
+    );
   });
 
   it("should return all characters", async () => {
