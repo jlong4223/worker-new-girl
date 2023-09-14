@@ -96,8 +96,13 @@ export const getCharacterDetails = async (
     const details = await getCharacterDetailsByRefIndex(id);
 
     return setCharacterAndDetailsObjForRes(character, details);
-  } catch (err) {
-    return apiResponse(err);
+  } catch (err: any | unknown) {
+    const errorMessage = {
+      customMessage: "Details not found. Check that the `id` is correct",
+      message: err.message,
+      idProvided: id,
+    };
+    return errorMessage;
   }
 };
 
@@ -113,6 +118,8 @@ export const getCharacterQuotes = async (id: string, isTest: boolean) => {
 
     return characterWithQuotes;
   } catch (err) {
+    // TODO test these - had to remove the apiResponse and just return the error in above function
+    // maybe create shareable error function errorRes(err, id) id is optional
     return apiResponse(err);
   }
 };

@@ -188,6 +188,17 @@ describe("Character Routes", () => {
     });
   });
 
+  it('should send an error message when the "id" is not found for extra details', async () => {
+    const resp = await worker.fetch(`/characters/1234567890/details`);
+    const resJSON = await resp.json();
+
+    expect(resJSON).toStrictEqual({
+      customMessage: "Details not found. Check that the `id` is correct",
+      idProvided: "1234567890",
+      message: "instance not found",
+    });
+  });
+
   it('gets 3 characters using the "size" query param', async () => {
     const resp = await worker.fetch("/characters?size=3");
     const resJSON = await resp.json();
@@ -195,7 +206,7 @@ describe("Character Routes", () => {
     expect(resJSON).toHaveLength(3);
   });
 
-  it("should not allow a query that is not supported recieve data", async () => {
+  it("should not allow a query that is not supported receive data", async () => {
     const badQuery = "fakeQuery=3";
     const resp = await worker.fetch(`/characters?${badQuery}`);
     const resJSON = await resp.json();
