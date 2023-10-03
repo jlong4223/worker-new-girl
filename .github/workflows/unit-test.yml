@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Log vars
+        run: |
+          echo $FAUNA_SECRET
       - name: Install dependencies
         run: |
           npm install
