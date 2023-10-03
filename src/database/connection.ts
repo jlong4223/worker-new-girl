@@ -2,7 +2,7 @@ import faunadb from "faunadb";
 
 export const faunaClient = new faunadb.Client({
   // @ts-ignore
-  secret: FAUNA_SECRET,
+  secret: FAUNA_SECRET || process.env.FAUNA_SECRET,
 });
 
 export const {

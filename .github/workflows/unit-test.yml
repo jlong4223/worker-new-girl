@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  FAUNA_SECRET: ${{ secrets.FAUNA_SECRET }}
+
 jobs:
   test:
     name: Unit Test CI
