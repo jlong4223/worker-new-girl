@@ -32,7 +32,7 @@ Learn more at https://developers.cloudflare.com/workers/
 
 ## Testing against the DB locally
 
-- need to include `test-header = "true"` in the request headers for all POST/PUT/DELETE/PACTH requests
+- need to include `test-header = "true"` in the request headers for all POST/PUT/DELETE/PATCH requests
 - Test data is stored in the DB for 1 day before being automatically deleted
 - GET requests do not need the header
 
