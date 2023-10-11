@@ -43,7 +43,7 @@ export interface CharacterParams {
 export interface CharactersBody {
   name: string;
   age: number;
-  occupation: string;
+  occupations: string[];
   image: string;
   type: string;
 }
