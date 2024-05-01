@@ -1,9 +1,9 @@
+import { getRawCollectionDocData } from "@gearsnbeans/faunadb-utils";
 import { Collections } from "../../collections";
 import { getQuotesByCharacterIdIndex } from "../../indexes";
-import { getAllDocumentsRefsAndData } from "../../queries";
 
 export const getAllQuotes = async () => {
-  const quotes = await getAllDocumentsRefsAndData(Collections.QUOTES);
+  const quotes = await getRawCollectionDocData(Collections.QUOTES);
   return quotes;
 };
 
