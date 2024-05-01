@@ -6,6 +6,7 @@ import { notFoundHandler } from "./handlers/notFound";
 import { charactersRouter } from "./routes/characters";
 import { checkForTestRequest } from "./middleware/checkForTestRequest";
 import { quotesRouter } from "./routes/quotes";
+import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -20,6 +21,12 @@ router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
+  // TODO update this to use env var and update the gh workflow file ; extra note in there
+  setFaunaSecret("fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb");
+  // the secret would need to be added to cloudlfare workers and however a worker grabs the secret is how it would be here instead of the vite way
+  // const secret = import.meta.env.VITE_FAUNA_SECRET;
+  // console.log("🚀 ~ handleRequest ~ secret:", secret);
+  // setFaunaSecret(secret);
   return router
     .handle(request)
     .then(corsify)
