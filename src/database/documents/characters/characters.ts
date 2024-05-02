@@ -9,8 +9,10 @@ import {
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
 import {
+  createNewDocument,
   getAllDocumentsRefsAndData,
   getSingleRefDataByID,
+  updateDocumentData,
 } from "../../queries";
 import {
   setCharacterAllDataObjForRes,
@@ -23,11 +25,6 @@ import {
   getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
-import {
-  updateDocumentData,
-  createNewDocument,
-  RawDocumentRefs,
-} from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
@@ -35,8 +32,6 @@ const {
   CHARACTERS_DETAILS,
   CHARACTERS_TEST_DETAILS,
 } = Collections;
-
-// TODO remove more in house queries and use the faunadb-utils queries
 
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
@@ -71,7 +66,7 @@ export const createNewCharacter = async (
 };
 
 export const getCharacterType = async (type: CharacterType) => {
-  const charactersDataWithRef: RawDocumentRefs = await getCharacterTypeIndex(
+  const charactersDataWithRef: AllDocumentRefs = await getCharacterTypeIndex(
     type
   );
 
