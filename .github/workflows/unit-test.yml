@@ -18,11 +18,9 @@ jobs:
       - name: Log vars
         run: |
           echo $FAUNA_SECRET
-
       - name: Install dependencies
         run: |
-          npm install --legacy-peer-deps
-
+          npm install
       - name: Run tests
         run: |
           npm run test
