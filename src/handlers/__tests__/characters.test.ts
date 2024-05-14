@@ -11,6 +11,7 @@ import {
   testManDBID,
 } from "../../test-helpers/testData";
 import { CharacterType } from "../../database/documents/characters/interfaces";
+import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
 
 describe("Character Routes", () => {
   let worker: UnstableDevWorker;
@@ -37,6 +38,9 @@ describe("Character Routes", () => {
   };
 
   beforeAll(async () => {
+    const faunaSecret = process.env.FAUNA_SECRET as string;
+    setFaunaSecret(faunaSecret);
+
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
     });

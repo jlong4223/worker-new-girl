@@ -1,11 +1,15 @@
 import { expect, beforeAll, afterAll, describe, it } from "vitest";
 import { UnstableDevWorker, unstable_dev } from "wrangler";
 import { nickMillerDBid } from "../../test-helpers/testData";
+import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
 
 describe("Quote Routes", () => {
   let worker: UnstableDevWorker;
 
   beforeAll(async () => {
+    const faunaSecret = process.env.FAUNA_SECRET as string;
+    setFaunaSecret(faunaSecret);
+
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
     });
