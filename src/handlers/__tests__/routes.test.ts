@@ -14,6 +14,10 @@ describe("General Routes", () => {
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
+      vars: {
+        FAUNA_SECRET: faunaSecret,
+      },
+      config: "wrangler.toml",
     });
   });
 

@@ -32,6 +32,7 @@ export const handleRequest = (request: Request) => {
   // get the env running in the worker
   // const secret = process.env.FAUNA_SECRET as string;
   // const secret = "fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb";
+  // @ts-ignore
   const secret = FAUNA_SECRET;
   console.log(
     "🚀 ~ file: routesHandler.ts:37 ~ handleRequest ~ secret:",
