@@ -28,11 +28,11 @@ export const handleRequest = (request: Request) => {
   // @ts-ignore // on this worker version, secret is binded to the global object
   // get the dev var from the env
 
-  const secret = process.env.FAUNA_SECRET as string;
-  console.log(
-    "🚀 ~ file: routesHandler.ts:32 ~ handleRequest ~ secret:",
-    secret
-  );
+  console.log("RUNNING IN THE WORKER");
+  // get the env running in the worker
+  // const secret = process.env.FAUNA_SECRET as string;
+  const secret = "fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb";
+
   setFaunaSecret(secret);
 
   return router
