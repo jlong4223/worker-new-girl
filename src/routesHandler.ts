@@ -26,7 +26,7 @@ export const handleRequest = (request: Request) => {
   // the secret would need to be added to cloudlfare workers and however a worker grabs the secret is how it would be here instead of the vite way
   // const secret = import.meta.env.VITE_FAUNA_SECRET;
   // @ts-ignore // on this worker version, secret is binded to the global object
-  const secret = FAUNA_SECRET;
+  const secret = FAUNA_SECRET ?? process.env.FAUNA_SECRET;
   setFaunaSecret(secret);
 
   return router
