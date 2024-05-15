@@ -8,11 +8,13 @@ describe("General Routes", () => {
 
   beforeAll(async () => {
     const faunaSecret = process.env.FAUNA_SECRET as string;
+    const SHOW_INFO_ID = process.env.SHOW_INFO_ID as string;
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
       vars: {
         FAUNA_SECRET: faunaSecret,
+        SHOW_INFO_ID,
       },
       config: "wrangler.toml",
     });
