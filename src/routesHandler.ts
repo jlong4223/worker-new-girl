@@ -21,23 +21,8 @@ router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
-  // TODO update this to use env var and update the gh workflow file ; extra note in there
-  // setFaunaSecret("fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb");
-  // the secret would need to be added to cloudlfare workers and however a worker grabs the secret is how it would be here instead of the vite way
-  // const secret = import.meta.env.VITE_FAUNA_SECRET;
-  // @ts-ignore // on this worker version, secret is binded to the global object
-  // get the dev var from the env
-
-  console.log("RUNNING IN THE WORKER");
-  // get the env running in the worker
-  // const secret = process.env.FAUNA_SECRET as string;
-  // const secret = "fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb";
   // @ts-ignore
   const secret = FAUNA_SECRET;
-  console.log(
-    "🚀 ~ file: routesHandler.ts:37 ~ handleRequest ~ secret:",
-    secret
-  );
 
   setFaunaSecret(secret);
 

@@ -8,7 +8,6 @@ describe("Quote Routes", () => {
 
   beforeAll(async () => {
     const faunaSecret = process.env.FAUNA_SECRET as string;
-    setFaunaSecret(faunaSecret);
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },

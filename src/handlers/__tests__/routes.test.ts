@@ -7,10 +7,7 @@ describe("General Routes", () => {
   let worker: UnstableDevWorker;
 
   beforeAll(async () => {
-    // TODO somethiing to try is to setFaunaKey here and remove the hard coded key in the index.ts file to the env var; gotta figure out how to do that
-    // get it from the env
     const faunaSecret = process.env.FAUNA_SECRET as string;
-    setFaunaSecret(faunaSecret);
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
