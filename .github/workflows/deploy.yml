@@ -1,9 +1,11 @@
 name: Deploy to Cloudflare
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Unit Test CI"]
+    types:
+      - completed
     branches: [master, dev]
-    paths-ignore: [README.md, .gitignore, .github/workflows/unit-test.yml]
 
 jobs:
   deploy:
