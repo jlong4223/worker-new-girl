@@ -12,7 +12,6 @@ import {
   createNewDocument,
   getAllDocumentsRefsAndData,
   getSingleRefDataByID,
-  updateDocumentData,
 } from "../../queries";
 import {
   setCharacterAllDataObjForRes,
@@ -25,6 +24,7 @@ import {
   getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
+import { updateDocumentData } from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
