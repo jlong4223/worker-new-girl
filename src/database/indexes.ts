@@ -1,18 +1,25 @@
-import { AllDocumentRefs } from "./documents/characters/interfaces";
 import { Indexes } from "./collections";
-import { getDataByIndex, getDataByIndexWithValueSet } from "./queries";
+import {
+  getRawDataByIndex,
+  getDataByIndexWithValueSet,
+  RawDocumentRefs,
+  IndexResult,
+} from "@gearsnbeans/faunadb-utils";
 
 export const getCharacterTypeIndex = async (
   type: string
-): Promise<AllDocumentRefs> => {
-  const charactersByType = await getDataByIndex(Indexes.CHARACTER_TYPE, type);
+): Promise<RawDocumentRefs> => {
+  const charactersByType = await getRawDataByIndex(
+    Indexes.CHARACTER_TYPE,
+    type
+  );
   return charactersByType;
 };
 
 export const getCharacterDetailsByRefIndex = async (
   characterRefID: string
-): Promise<AllDocumentRefs> => {
-  const characterDetails = await getDataByIndex(
+): Promise<RawDocumentRefs> => {
+  const characterDetails = await getRawDataByIndex(
     Indexes.CHARACTER_DETAILS,
     characterRefID
   );
@@ -22,7 +29,7 @@ export const getCharacterDetailsByRefIndex = async (
 
 export const getQuotesByCharacterIdIndex = async (
   characterID: string
-): Promise<AllDocumentRefs> => {
+): Promise<IndexResult> => {
   const quotes = await getDataByIndexWithValueSet(
     Indexes.CHARACTER_ID,
     characterID
