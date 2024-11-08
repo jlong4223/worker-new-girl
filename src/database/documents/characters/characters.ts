@@ -8,7 +8,7 @@ import {
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
-import { createNewDocument, getAllDocumentsRefsAndData } from "../../queries";
+import { createNewDocument } from "../../queries";
 import {
   setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
@@ -20,7 +20,12 @@ import {
   getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
-import { getRawDataById, updateDocumentData } from "@gearsnbeans/faunadb-utils";
+import {
+  getRawCollectionDocData,
+  getRawDataById,
+  RawDocumentRefs,
+  updateDocumentData,
+} from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
@@ -31,7 +36,8 @@ const {
 
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
-  const documentData: AllDocumentRefs = await getAllDocumentsRefsAndData(
+
+  const documentData: RawDocumentRefs = await getRawCollectionDocData(
     collection,
     size
   );
