@@ -6,6 +6,9 @@ describe("General Routes", () => {
   let worker: UnstableDevWorker;
 
   beforeAll(async () => {
+    /*
+      This is how i got it to work with GH Unit tests and also wrangler dev for testing. Needed to get the env var and plug it into the worker config
+    */
     const faunaSecret = process.env.FAUNA_SECRET as string;
     const SHOW_INFO_ID = process.env.SHOW_INFO_ID as string;
 
