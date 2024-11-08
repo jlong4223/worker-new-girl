@@ -8,11 +8,7 @@ import {
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
-import {
-  createNewDocument,
-  getAllDocumentsRefsAndData,
-  getSingleRefDataByID,
-} from "../../queries";
+import { createNewDocument, getAllDocumentsRefsAndData } from "../../queries";
 import {
   setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
@@ -24,7 +20,7 @@ import {
   getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
-import { updateDocumentData } from "@gearsnbeans/faunadb-utils";
+import { getRawDataById, updateDocumentData } from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
@@ -52,7 +48,8 @@ export const getCharacterByID = async (
   isTest: boolean
 ): Promise<CharactersBodyWithID> => {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
-  const document = await getSingleRefDataByID(collection, id);
+
+  const document = await getRawDataById(collection, id);
   return setCharacterObj(document);
 };
 
