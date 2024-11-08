@@ -1,7 +1,6 @@
 import { expect, beforeAll, afterAll, describe, it } from "vitest";
 import { UnstableDevWorker, unstable_dev } from "wrangler";
 import { nickMillerDBid } from "../../test-helpers/testData";
-import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
 
 describe("Quote Routes", () => {
   let worker: UnstableDevWorker;

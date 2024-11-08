@@ -21,8 +21,8 @@ router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
-  // @ts-ignore
-  const secret = FAUNA_SECRET;
+  // @ts-ignore this is set automatically by the wrangler.toml file or by the .dev.vars file
+  const secret = FAUNA_SECRET as string;
 
   setFaunaSecret(secret);
 
