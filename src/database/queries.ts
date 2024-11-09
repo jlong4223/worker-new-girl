@@ -29,7 +29,7 @@ interface GetAllRefIDData {
 }
 
 /* DEPRECATED: Use getAllDocumentsRefsAndData instead */
-export const getAllRefsWithIDs = async ({
+const getAllRefsWithIDs = async ({
   collection,
   size,
 }: GetAllRefsIDs): Promise<AllDocumentRefs> => {
@@ -44,7 +44,7 @@ Just leaving here as a reference as an alternative for how to get multiple refs 
 Before you'd have to get all the refs (getAllRefsWithIDs), then map over them to get the data
 Now just use getAllDocumentsRefsAndData and get the data directly with the `Map` query
 */
-export const getMultipleRefsDataByID = async ({
+const getMultipleRefsDataByID = async ({
   collection,
   allDocumentRefs,
 }: GetAllRefIDData): Promise<Array<T>> => {
@@ -55,7 +55,10 @@ export const getMultipleRefsDataByID = async ({
   );
 };
 
-export const getSingleRefDataByID = async (
+// NOTE
+// is called getRawDataById in new package
+// DEPRECATED
+const getSingleRefDataByID = async (
   collection: string,
   id: string
 ): Promise<AllDocumentRefs> => {
@@ -63,7 +66,16 @@ export const getSingleRefDataByID = async (
 };
 
 // NOTE: Paginate returns a default number of 64 documents
-export const getAllDocumentsRefsAndData = async (
+/* 
+faunadb utils name getCollectionDocDataAndIds
+will need to be modified if using that 
+
+BUT 
+
+can use getRawCollectionDocData 1for1
+DEPRECATED
+*/
+const getAllDocumentsRefsAndData = async (
   collection: string,
   size?: number
 ): Promise<AllDocumentRefs> => {
@@ -77,7 +89,9 @@ export const getAllDocumentsRefsAndData = async (
   );
 };
 
-export const createNewDocument = async (data: any, collection: string) => {
+// NOTE one for one
+// DEPRECATED
+const createNewDocument = async (data: any, collection: string) => {
   return await faunaClient.query(
     Create(Collection(collection), {
       data,
@@ -85,7 +99,9 @@ export const createNewDocument = async (data: any, collection: string) => {
   );
 };
 
-export const updateDocumentData = async (
+// NOTE unused in favor of updateDocumentData in faunadb-utils
+// DEPRECATED
+const updateDocumentData = async (
   id: string,
   newData: any,
   collection: string
@@ -102,7 +118,9 @@ export const updateDocumentData = async (
   );
 };
 
-export const getDataByIndex = async (
+// NOTE unused in favor of getRawDataByIndex in faunadb-utils
+// DEPRECATED
+const getDataByIndex = async (
   index: string,
   indexTerm: string
 ): Promise<AllDocumentRefs> => {
@@ -111,7 +129,11 @@ export const getDataByIndex = async (
   );
 };
 
-export const getDataByIndexWithValueSet = async (
+// NOTE not in the new package; will need to refresh my memory on this
+// add it to new package
+//. value is just the field name that gets returned by the index search
+// DEPRECATED
+const getDataByIndexWithValueSet = async (
   index: string,
   indexTerm: string
 ): Promise<any> => {
@@ -121,3 +143,7 @@ export const getDataByIndexWithValueSet = async (
 /* used this resource for setting up the index query
 https://docs.fauna.com/fauna/current/build/fql/indexes/?lang=javascript#collection_indexes
 */
+
+// TODO start swapping these out for my new @gearsnbeans/faunadb-utils package
+// see which ones are one for one swaps and which ones need to be modified
+// names may be different
