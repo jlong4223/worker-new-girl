@@ -8,7 +8,7 @@ import {
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
-import { createNewDocument } from "../../queries";
+
 import {
   setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
@@ -21,6 +21,7 @@ import {
 } from "../../indexes";
 import { apiResponse } from "../../../utils/routes";
 import {
+  createNewDocument,
   getRawCollectionDocData,
   getRawDataById,
   RawDocumentRefs,
