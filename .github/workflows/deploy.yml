@@ -2,13 +2,13 @@ name: Deploy to Cloudflare
 
 on:
   # TODO bring back when this is in master
-  # workflow_run:
-  #   workflows: [Unit Test CI]
-  #   types:
-  #     - completed
-  #   branches: [master, dev]
-  push:
+  workflow_run:
+    workflows: [Unit Test CI]
+    types:
+      - completed
     branches: [master, dev]
+  # push:
+  # branches: [master, dev]
 
 jobs:
   deploy:
