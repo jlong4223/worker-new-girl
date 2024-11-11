@@ -6,6 +6,7 @@ import { notFoundHandler } from "./handlers/notFound";
 import { charactersRouter } from "./routes/characters";
 import { checkForTestRequest } from "./middleware/checkForTestRequest";
 import { quotesRouter } from "./routes/quotes";
+import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -20,6 +21,11 @@ router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
+  // @ts-ignore this is set automatically by the wrangler.toml file or by the .dev.vars file
+  const secret = FAUNA_SECRET as string;
+
+  setFaunaSecret(secret);
+
   return router
     .handle(request)
     .then(corsify)

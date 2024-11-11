@@ -2,11 +2,11 @@ name = "worker-new-girl"
 main = "src/index.ts"
 compatibility_date = "2023-04-20"
 
-[env.vars]
+[vars]
 SHOW_INFO_ID = "365484020443643981"
 
 [env.dev.vars]
-FAUNA_SECRET = "fnAFCCznjeAATXszZR6chXVs0v4-8o5c3yn8mKcb"
+# FAUNA_SECRET = 
 SHOW_INFO_ID = "365484020443643981"
 ENVIRONMENT = "dev"
 

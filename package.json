@@ -7,8 +7,11 @@
     "deploy": "wrangler publish",
     "push:deploy": "git push origin master && npm run deploy",
     "test": "vitest",
+    "test:run": "vitest run",
+    "tsc": "tsc",
     "test:cov": "vitest --coverage",
-    "deploy-dev": "wrangler publish --env dev"
+    "deploy-dev": "wrangler publish --env dev",
+    "build": "tsc"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230404.0",
@@ -19,9 +22,10 @@
   },
   "private": true,
   "dependencies": {
+    "@gearsnbeans/faunadb-utils": "^0.0.5",
     "faunadb": "^4.8.0",
     "itty-cors": "^0.3.6",
     "itty-router": "^3.0.12",
-    "joi": "^17.9.2"
+    "joi": "^17.13.0"
   }
 }

@@ -2,7 +2,7 @@ name: Unit Test CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, dev]
   pull_request:
     branches: [master]
 
@@ -26,3 +26,4 @@ jobs:
           npm run test
         env:
           FAUNA_SECRET: ${{ secrets.FAUNA_SECRET }}
+          SHOW_INFO_ID: ${{ secrets.SHOW_INFO_ID }}
