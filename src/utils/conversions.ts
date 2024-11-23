@@ -11,6 +11,17 @@ export const setCharacterObj = (character: any) => {
   };
 };
 
+export const setCharacterObjV10 = (character: any): CharactersBodyWithID => {
+  return {
+    name: character.name,
+    age: character.age,
+    occupations: character.occupations,
+    image: character.image,
+    type: character.type,
+    id: character.id,
+  };
+};
+
 export const setCharacterAndDetailsObjForRes = (
   character: CharactersBodyWithID,
   details: any

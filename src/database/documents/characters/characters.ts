@@ -1,18 +1,17 @@
 import {
   AllDocumentRefs,
   CharacterDetailsRes,
-  CharacterDocDataRef,
   CharacterParams,
   CharacterType,
   CharactersBodyWithID,
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
-
 import {
   setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
   setCharacterObj,
+  setCharacterObjV10,
 } from "../../../utils/conversions";
 import {
   getCharacterDetailsByRefIndex,
@@ -22,11 +21,10 @@ import {
 import { apiResponse } from "../../../utils/routes";
 import {
   createNewDocument,
-  getRawCollectionDocData,
   getRawDataById,
-  RawDocumentRefs,
   updateDocumentData,
 } from "@gearsnbeans/faunadb-utils";
+import { getRawCollectionData, RawDocument } from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
@@ -38,16 +36,12 @@ const {
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
-  const documentData: RawDocumentRefs = await getRawCollectionDocData(
-    collection,
-    size
+  const { data } = await getRawCollectionData(collection, size);
+  const characterDataV10: CharactersBodyWithID[] = data.data.map(
+    (character: RawDocument) => setCharacterObjV10(character)
   );
 
-  const characterData = documentData.data.map(
-    (character: any): CharacterDocDataRef => setCharacterObj(character)
-  );
-
-  return characterData;
+  return characterDataV10;
 }
 
 export const getCharacterByID = async (
