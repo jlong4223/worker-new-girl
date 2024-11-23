@@ -6,7 +6,7 @@ import { notFoundHandler } from "./handlers/notFound";
 import { charactersRouter } from "./routes/characters";
 import { checkForTestRequest } from "./middleware/checkForTestRequest";
 import { quotesRouter } from "./routes/quotes";
-import { setFaunaSecret } from "@gearsnbeans/faunadb-utils";
+import { setFaunaSecret, setFaunaSecretV10 } from "@gearsnbeans/faunadb-utils";
 
 const { preflight, corsify } = createCors({ origins: ["*"] });
 
@@ -21,10 +21,15 @@ router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
 export const handleRequest = (request: Request) => {
-  // @ts-ignore this is set automatically by the wrangler.toml file or by the .dev.vars file
+  // these secrets are set automatically by the wrangler.toml file or by the .dev.vars file
+
+  // @ts-ignore
   const secret = FAUNA_SECRET as string;
+  // @ts-ignore
+  const v10Secret = V10_FAUNA_SECRET as string;
 
   setFaunaSecret(secret);
+  setFaunaSecretV10(v10Secret);
 
   return router
     .handle(request)
@@ -37,7 +42,7 @@ export const handleErrorRequest = (request: Request, e: Error) => {
   return apiResponse(
     {
       message: "Theres been an error accessing the api.",
-      note: "This route may not exist or is currently under maintenance.",
+      note: "There may be an error, this route may not exist or is currently under maintenance.",
       error: e.message,
       errorDetails: e.stack,
       request: {
