@@ -38,11 +38,13 @@ describe("Character Routes", () => {
 
   beforeAll(async () => {
     const faunaSecret = process.env.FAUNA_SECRET as string;
+    const faunaSecretV10 = process.env.V10_FAUNA_SECRET as string;
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
       vars: {
         FAUNA_SECRET: faunaSecret,
+        V10_FAUNA_SECRET: faunaSecretV10,
       },
       config: "wrangler.toml",
     });
