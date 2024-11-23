@@ -28,3 +28,4 @@ jobs:
         env:
           FAUNA_SECRET: ${{ secrets.FAUNA_SECRET }}
           SHOW_INFO_ID: ${{ secrets.SHOW_INFO_ID }}
+          V10_FAUNA_SECRET: ${{ secrets.V10_FAUNA_SECRET }}
