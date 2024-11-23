@@ -37,11 +37,11 @@ export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
   const { data } = await getRawCollectionData(collection, size);
-  const characterDataV10: CharactersBodyWithID[] = data.data.map((character) =>
+  const characterData: CharactersBodyWithID[] = data.data.map((character) =>
     setCharacterObjV10(character)
   );
 
-  return characterDataV10;
+  return characterData;
 }
 
 export const getCharacterByID = async (
