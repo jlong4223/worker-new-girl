@@ -8,6 +8,7 @@ on:
 
 env:
   FAUNA_SECRET: ${{ secrets.FAUNA_SECRET }}
+  V10_FAUNA_SECRET: ${{ secrets.V10_FAUNA_SECRET }}
 
 jobs:
   test:
