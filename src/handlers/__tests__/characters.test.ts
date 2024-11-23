@@ -38,7 +38,15 @@ describe("Character Routes", () => {
 
   beforeAll(async () => {
     const faunaSecret = process.env.FAUNA_SECRET as string;
+    console.log(
+      "🚀 ~ file: characters.test.ts:53 ~ beforeAll ~ faunaSecret:",
+      faunaSecret
+    );
     const faunaSecretV10 = process.env.V10_FAUNA_SECRET as string;
+    console.log(
+      "🚀 ~ file: characters.test.ts:52 ~ beforeAll ~ faunaSecretV10:",
+      faunaSecretV10
+    );
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
