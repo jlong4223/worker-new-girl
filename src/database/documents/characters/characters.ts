@@ -1,6 +1,7 @@
 import {
   AllDocumentRefs,
   CharacterDetailsRes,
+  CharacterDoc,
   CharacterParams,
   CharacterType,
   CharactersBodyWithID,
@@ -38,7 +39,7 @@ export async function getCharacters({ isTest, size }: CharacterParams = {}) {
 
   const { data } = await getRawCollectionData(collection, size);
   const characterData: CharactersBodyWithID[] = data.data.map((character) =>
-    setCharacterObjV10(character)
+    setCharacterObjV10(character as CharacterDoc)
   );
 
   return characterData;
