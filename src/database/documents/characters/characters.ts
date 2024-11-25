@@ -22,10 +22,10 @@ import {
 import { apiResponse } from "../../../utils/routes";
 import {
   createNewDocument,
-  getRawDataById,
+  getRawDocDataById,
   updateDocumentData,
+  getRawCollectionData,
 } from "@gearsnbeans/faunadb-utils";
-import { getRawCollectionData, RawDocument } from "@gearsnbeans/faunadb-utils";
 
 const {
   CHARACTERS,
@@ -51,8 +51,8 @@ export const getCharacterByID = async (
 ): Promise<CharactersBodyWithID> => {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
-  const document = await getRawDataById(collection, id);
-  return setCharacterObj(document);
+  const { data: document } = await getRawDocDataById(collection, id);
+  return setCharacterObjV10(document as CharacterDoc);
 };
 
 export const createNewCharacter = async (
