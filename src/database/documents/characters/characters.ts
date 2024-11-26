@@ -55,7 +55,7 @@ export const getCharacterByID = async (
   const { data: document } = await getRawDocDataById(collection, id);
 
   if (!document.id || document.cause === v10ApiErrors.NOT_FOUND) {
-    throw new Error("Character not found. Check that the `id` is correct");
+    throw new Error(v10ApiErrors.NOT_FOUND_MESSAGE);
   }
 
   return setCharacterObjV10(document as CharacterDoc);
@@ -92,7 +92,6 @@ export const updateCharacter = async (
   return updatedCharacter;
 };
 
-// this fails. probably bc of the conversion functions
 export const getCharacterDetails = async (
   id: string,
   isTest: boolean

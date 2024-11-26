@@ -11,6 +11,7 @@ import {
   testManDBID,
 } from "../../test-helpers/testData";
 import { CharacterType } from "../../database/documents/characters/interfaces";
+import { v10ApiErrors } from "../../database/documents/errors";
 
 describe("Character Routes", () => {
   let worker: UnstableDevWorker;
@@ -203,7 +204,7 @@ describe("Character Routes", () => {
     expect(resJSON).toStrictEqual({
       customMessage: "Details not found. Check that the `id` is correct",
       idProvided: "1234567890",
-      message: "instance not found",
+      message: v10ApiErrors.NOT_FOUND_MESSAGE,
     });
   });
 
