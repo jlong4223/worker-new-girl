@@ -80,4 +80,5 @@ export interface CharacterDoc extends RawDocument {
   occupations: string[];
   image: string;
   type: string;
+  id: string;
 }
