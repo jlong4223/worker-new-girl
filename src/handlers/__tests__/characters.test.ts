@@ -81,15 +81,22 @@ describe("Character Routes", () => {
     const resp = await worker.fetch(`/characters/1234567890`);
 
     const resJSON = await resp.json();
+    expect(resJSON).toStrictEqual({
+      customMessage: "Character not found. Check that the `id` is correct",
+      idProvided: "1234567890",
+      message: v10ApiErrors.NOT_FOUND_MESSAGE,
+    });
+
+    // TODO add example response from the API v10 fql error
     // @ts-ignore
-    expect(resJSON.error.requestResult.statusCode).toStrictEqual(
-      failingCharacterIdMessage.error.requestResult.statusCode
-    );
+    // expect(resJSON.error.requestResult.statusCode).toStrictEqual(
+    // failingCharacterIdMessage.error.requestResult.statusCode
+    // );
 
     // @ts-ignore
-    expect(resJSON.customMessage).toStrictEqual(
-      failingCharacterIdMessage.customMessage
-    );
+    // expect(resJSON.customMessage).toStrictEqual(
+    //   failingCharacterIdMessage.customMessage
+    // );
   });
 
   it("should return all characters", async () => {
