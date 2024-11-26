@@ -82,9 +82,9 @@ describe("Character Routes", () => {
 
     const resJSON = await resp.json();
     expect(resJSON).toStrictEqual({
-      customMessage: "Character not found. Check that the `id` is correct",
-      idProvided: "1234567890",
-      message: v10ApiErrors.NOT_FOUND_MESSAGE,
+      customMessage:
+        "There was an error getting the character with the id of 1234567890",
+      error: {},
     });
 
     // TODO add example response from the API v10 fql error
