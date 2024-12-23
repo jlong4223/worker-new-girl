@@ -22,7 +22,7 @@
   },
   "private": true,
   "dependencies": {
-    "@gearsnbeans/faunadb-utils": "^0.1.0",
+    "@gearsnbeans/faunadb-utils": "^0.1.1",
     "itty-cors": "^0.3.6",
     "itty-router": "^3.0.12",
     "joi": "^17.13.0"
