@@ -39,3 +39,14 @@ Learn more at https://developers.cloudflare.com/workers/
 ## package.json Scripts
 
 - deploy: this is for production deployment
+
+## ENV Var Updates
+
+Places to check & update when adding new env vars:
+
+- `wrangler.toml` - for the production environment; only for non-secret vars
+- `.dev.vars` - for the development environment; only for secret vars
+- `.env` - for tests & the development environment; only for secret vars
+- `unit-test.yml` - for the CI test environment; only for secret vars
+- `wranger config in tests` - for the CI & local test environment; for all vars
+- `Cloudflare Workers Dashboard` - for the production & dev environment; for all vars

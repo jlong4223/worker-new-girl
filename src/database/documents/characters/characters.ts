@@ -1,18 +1,18 @@
 import {
   AllDocumentRefs,
   CharacterDetailsRes,
-  CharacterDocDataRef,
+  CharacterDoc,
   CharacterParams,
   CharacterType,
   CharactersBodyWithID,
 } from "./interfaces";
 import { Collections } from "../../collections";
 import { CharactersBody } from "./interfaces";
-
 import {
   setCharacterAllDataObjForRes,
   setCharacterAndDetailsObjForRes,
   setCharacterObj,
+  setCharacterObjV10,
 } from "../../../utils/conversions";
 import {
   getCharacterDetailsByRefIndex,
@@ -22,11 +22,11 @@ import {
 import { apiResponse } from "../../../utils/routes";
 import {
   createNewDocument,
-  getRawCollectionDocData,
-  getRawDataById,
-  RawDocumentRefs,
+  getRawDocDataById,
   updateDocumentData,
+  getRawCollectionData,
 } from "@gearsnbeans/faunadb-utils";
+import { v10ApiErrors } from "../errors";
 
 const {
   CHARACTERS,
@@ -38,13 +38,9 @@ const {
 export async function getCharacters({ isTest, size }: CharacterParams = {}) {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
-  const documentData: RawDocumentRefs = await getRawCollectionDocData(
-    collection,
-    size
-  );
-
-  const characterData = documentData.data.map(
-    (character: any): CharacterDocDataRef => setCharacterObj(character)
+  const { data } = await getRawCollectionData(collection, size);
+  const characterData: CharactersBodyWithID[] = data.data.map((character) =>
+    setCharacterObjV10(character as CharacterDoc)
   );
 
   return characterData;
@@ -56,8 +52,13 @@ export const getCharacterByID = async (
 ): Promise<CharactersBodyWithID> => {
   const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
 
-  const document = await getRawDataById(collection, id);
-  return setCharacterObj(document);
+  const { data: document } = await getRawDocDataById(collection, id);
+
+  if (!document.id || document.cause === v10ApiErrors.NOT_FOUND) {
+    throw new Error(v10ApiErrors.NOT_FOUND_MESSAGE);
+  }
+
+  return setCharacterObjV10(document as CharacterDoc);
 };
 
 export const createNewCharacter = async (

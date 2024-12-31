@@ -1,6 +1,7 @@
 import {
   CharacterAllData,
   CharacterDetailsRes,
+  CharacterDoc,
   CharactersBodyWithID,
 } from "../database/documents/characters/interfaces";
 
@@ -8,6 +9,20 @@ export const setCharacterObj = (character: any) => {
   return {
     ...character.data,
     id: character.ref.id,
+  };
+};
+
+export const setCharacterObjV10 = (
+  character: CharacterDoc
+): CharactersBodyWithID => {
+  const { name, age, occupations, image, type, id } = character;
+  return {
+    name,
+    age,
+    occupations,
+    image,
+    type,
+    id,
   };
 };
 

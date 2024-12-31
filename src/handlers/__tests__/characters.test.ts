@@ -11,6 +11,7 @@ import {
   testManDBID,
 } from "../../test-helpers/testData";
 import { CharacterType } from "../../database/documents/characters/interfaces";
+import { v10ApiErrors } from "../../database/documents/errors";
 
 describe("Character Routes", () => {
   let worker: UnstableDevWorker;
@@ -38,11 +39,13 @@ describe("Character Routes", () => {
 
   beforeAll(async () => {
     const faunaSecret = process.env.FAUNA_SECRET as string;
+    const faunaSecretV10 = process.env.V10_FAUNA_SECRET as string;
 
     worker = await unstable_dev("src/index.ts", {
       experimental: { disableExperimentalWarning: true },
       vars: {
         FAUNA_SECRET: faunaSecret,
+        V10_FAUNA_SECRET: faunaSecretV10,
       },
       config: "wrangler.toml",
     });
@@ -78,15 +81,22 @@ describe("Character Routes", () => {
     const resp = await worker.fetch(`/characters/1234567890`);
 
     const resJSON = await resp.json();
+    expect(resJSON).toStrictEqual({
+      customMessage:
+        "There was an error getting the character with the id of 1234567890",
+      error: {},
+    });
+
+    // TODO add example response from the API v10 fql error
     // @ts-ignore
-    expect(resJSON.error.requestResult.statusCode).toStrictEqual(
-      failingCharacterIdMessage.error.requestResult.statusCode
-    );
+    // expect(resJSON.error.requestResult.statusCode).toStrictEqual(
+    // failingCharacterIdMessage.error.requestResult.statusCode
+    // );
 
     // @ts-ignore
-    expect(resJSON.customMessage).toStrictEqual(
-      failingCharacterIdMessage.customMessage
-    );
+    // expect(resJSON.customMessage).toStrictEqual(
+    //   failingCharacterIdMessage.customMessage
+    // );
   });
 
   it("should return all characters", async () => {
@@ -201,7 +211,7 @@ describe("Character Routes", () => {
     expect(resJSON).toStrictEqual({
       customMessage: "Details not found. Check that the `id` is correct",
       idProvided: "1234567890",
-      message: "instance not found",
+      message: v10ApiErrors.NOT_FOUND_MESSAGE,
     });
   });
 

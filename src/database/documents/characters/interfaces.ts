@@ -1,3 +1,5 @@
+import { RawDocument } from "@gearsnbeans/faunadb-utils";
+
 export interface AllDocumentRefs {
   data: [
     {
@@ -70,4 +72,13 @@ export interface CharacterDetailsBody {
 export enum CharacterType {
   MAIN = "main",
   RECURRING = "recurring",
+}
+
+export interface CharacterDoc extends RawDocument {
+  name: string;
+  age: number;
+  occupations: string[];
+  image: string;
+  type: string;
+  id: string;
 }
