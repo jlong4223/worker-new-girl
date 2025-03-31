@@ -20,19 +20,15 @@ router.all("/characters/*", charactersRouter.handle);
 router.all("/quotes/*", quotesRouter.handle);
 router.all("*", notFoundHandler);
 
-export const handleRequest = (request: Request) => {
-  // these secrets are set automatically by the wrangler.toml file or by the .dev.vars file
-
-  // @ts-ignore
-  const secret = FAUNA_SECRET as string;
-  // @ts-ignore
-  const v10Secret = V10_FAUNA_SECRET as string;
+export const handleRequest = (request: Request, env: Env) => {
+  const secret = env.FAUNA_SECRET as string;
+  const v10Secret = env.V10_FAUNA_SECRET as string;
 
   setFaunaSecret(secret);
   setFaunaSecretV10(v10Secret);
 
   return router
-    .handle(request)
+    .handle(request, env)
     .then(corsify)
     .catch((e) => handleErrorRequest(request, e));
 };
