@@ -1,11 +1,21 @@
 name: Deploy to Cloudflare
 
 on:
-  workflow_run:
-    workflows: [Unit Test CI]
-    types:
-      - completed
-    branches: [master, dev]
+  # workflow_run:
+  #   workflows: [Unit Test CI]
+  #   types:
+  #     - completed
+  #   branches: [master, dev]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "prod"
+        type: choice
+        options:
+          - prod
+          - dev
 
 jobs:
   deploy:
