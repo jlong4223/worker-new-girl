@@ -22,11 +22,12 @@ import {
 import { apiResponse } from "../../../utils/routes";
 import {
   createNewDocument,
-  getRawDocDataById,
   updateDocumentData,
 } from "@gearsnbeans/faunadb-utils";
-import { v10ApiErrors } from "../errors";
-import { getAllCharacters } from "../../../data/characters";
+import {
+  getAllCharacters,
+  getCharacterDataById,
+} from "../../../data/characters";
 
 const {
   CHARACTERS,
@@ -48,14 +49,7 @@ export const getCharacterByID = async (
   id: string,
   isTest: boolean
 ): Promise<CharactersBodyWithID> => {
-  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
-
-  const { data: document } = await getRawDocDataById(collection, id);
-
-  if (!document.id || document.cause === v10ApiErrors.NOT_FOUND) {
-    throw new Error(v10ApiErrors.NOT_FOUND_MESSAGE);
-  }
-
+  const document = getCharacterDataById(id);
   return setCharacterObjV10(document as CharacterDoc);
 };
 

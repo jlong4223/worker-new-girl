@@ -6,6 +6,13 @@ export const getAllCharacters = (size?: number) => {
   return allCharacters;
 };
 
+export const getCharacterDataById = (id: string) => {
+  const character = allCharacters.find((character) => {
+    return character.id === id;
+  });
+  return character;
+};
+
 const allCharacters = [
   {
     name: "Nick Miller",
