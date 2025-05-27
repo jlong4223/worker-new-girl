@@ -90,19 +90,7 @@ describe("Character Routes", () => {
     expect(resJSON).toStrictEqual({
       customMessage:
         "There was an error getting the character with the id of 1234567890",
-      error: {},
     });
-
-    // TODO add example response from the API v10 fql error
-    // @ts-ignore
-    // expect(resJSON.error.requestResult.statusCode).toStrictEqual(
-    // failingCharacterIdMessage.error.requestResult.statusCode
-    // );
-
-    // @ts-ignore
-    // expect(resJSON.customMessage).toStrictEqual(
-    //   failingCharacterIdMessage.customMessage
-    // );
   });
 
   it("should return all characters", async () => {
