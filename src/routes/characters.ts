@@ -25,22 +25,22 @@ charactersRouter.get("/:id/details", getDetailedCharacterHandler);
 charactersRouter.get("/:id/quotes", getCharacterQuotesHandler);
 charactersRouter.get("/:id/alldata", getCharacterAllDataHandler);
 
-// TODO protect these routes
-charactersRouter.patch(
-  "/:id",
-  // @ts-ignore
-  getCharacterPatchValidation,
-  patchCharacterHandler
-);
+// TODO recreate when data is in D1 then protect these routes
+// charactersRouter.patch(
+//   "/:id",
+//   // @ts-ignore
+//   getCharacterPatchValidation,
+//   patchCharacterHandler
+// );
 
-charactersRouter.patch("/:id/details", patchCharacterDetailsHandler);
+// charactersRouter.patch("/:id/details", patchCharacterDetailsHandler);
 
-// TODO needs to add a check for isJared on the query
-charactersRouter.post(
-  "/",
-  // @ts-ignore
-  getCharacterBodyValidation,
-  createCharacterHandler
-);
+// // TODO needs to add a check for isJared on the query
+// charactersRouter.post(
+//   "/",
+//   // @ts-ignore
+//   getCharacterBodyValidation,
+//   createCharacterHandler
+// );
 
-charactersRouter.post("/:id/details", createCharacterDetailsHandler);
+// charactersRouter.post("/:id/details", createCharacterDetailsHandler);
