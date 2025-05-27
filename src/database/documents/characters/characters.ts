@@ -28,6 +28,7 @@ import {
   getAllCharacters,
   getCharacterDataById,
 } from "../../../data/characters";
+import { v10ApiErrors } from "../errors";
 
 const {
   CHARACTERS,
@@ -96,7 +97,7 @@ export const getCharacterDetails = async (
   } catch (err: any | unknown) {
     const errorMessage = {
       customMessage: "Details not found. Check that the `id` is correct",
-      message: err.message,
+      message: v10ApiErrors.NOT_FOUND_MESSAGE,
       idProvided: id,
     };
     return errorMessage;

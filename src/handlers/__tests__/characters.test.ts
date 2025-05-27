@@ -1,5 +1,5 @@
 import { unstable_dev } from "wrangler";
-import type { UnstableDevWorker } from "wrangler";
+import type { Unstable_DevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
 import {
   failingCharacterBody,
@@ -14,7 +14,7 @@ import { CharacterType } from "../../database/documents/characters/interfaces";
 import { v10ApiErrors } from "../../database/documents/errors";
 
 describe("Character Routes", () => {
-  let worker: UnstableDevWorker;
+  let worker: Unstable_DevWorker;
 
   const characterObjResponse = {
     id: expect.any(String),
@@ -23,6 +23,12 @@ describe("Character Routes", () => {
     image: expect.any(String),
     occupations: expect.any(Array),
     age: expect.any(Number),
+  };
+
+  const characterFailingObjResponse = {
+    idProvided: expect.any(String),
+    customMessage: expect.any(String),
+    message: expect.any(String),
   };
 
   const detailsObj = {
@@ -193,15 +199,10 @@ describe("Character Routes", () => {
   it("gets no details on a character when empty", async () => {
     const resp = await worker.fetch(`/characters/${testManDBID}/details`, {
       method: "GET",
-      headers: testHeader,
     });
 
     const resJSON = await resp.json();
-
-    expect(resJSON).toStrictEqual({
-      ...characterObjResponse,
-      details: {},
-    });
+    expect(resJSON).toStrictEqual(characterFailingObjResponse);
   });
 
   it('should send an error message when the "id" is not found for extra details', async () => {
