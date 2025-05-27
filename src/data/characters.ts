@@ -1,4 +1,5 @@
 import { allCharacters } from "./allCharacters";
+import { characterDetails } from "./characterDetails";
 
 export const getAllCharacters = (size?: number) => {
   if (size) {
@@ -13,4 +14,11 @@ export const getCharacterDataById = (id: string) => {
     return character.id === id;
   });
   return character;
+};
+
+export const getCharacterDetailsById = (id: string) => {
+  const detailsData = characterDetails.find((details) => {
+    return details.characterRef === id;
+  });
+  return detailsData;
 };

@@ -1,5 +1,5 @@
 import { unstable_dev } from "wrangler";
-import type { UnstableDevWorker } from "wrangler";
+import type { Unstable_DevWorker } from "wrangler";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
 import { setStatusCodeWithHeaders } from "../routes";
 import {
@@ -15,7 +15,7 @@ import {
 } from "../conversions";
 
 describe("Route utils", () => {
-  let worker: UnstableDevWorker;
+  let worker: Unstable_DevWorker;
 
   beforeAll(async () => {
     worker = await unstable_dev("src/index.ts", {
@@ -49,8 +49,8 @@ describe("Route utils", () => {
     ).toStrictEqual({
       ...nickMillerDBData,
       details: {
-        ...characterDetails.data[0].data,
-        id: characterDetails.data[0].ref.value.id,
+        ...characterDetails,
+        id: characterDetails.id,
       },
     });
   });

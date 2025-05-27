@@ -27,6 +27,7 @@ import {
 import {
   getAllCharacters,
   getCharacterDataById,
+  getCharacterDetailsById,
 } from "../../../data/characters";
 import { v10ApiErrors } from "../errors";
 
@@ -91,7 +92,7 @@ export const getCharacterDetails = async (
 ): Promise<CharacterDetailsRes | unknown> => {
   try {
     const character = await getCharacterByID(id, isTest);
-    const details = await getCharacterDetailsByRefIndex(id);
+    const details = getCharacterDetailsById(id);
 
     return setCharacterAndDetailsObjForRes(character, details);
   } catch (err: any | unknown) {
