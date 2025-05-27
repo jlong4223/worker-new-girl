@@ -24,9 +24,9 @@ import {
   createNewDocument,
   getRawDocDataById,
   updateDocumentData,
-  getRawCollectionData,
 } from "@gearsnbeans/faunadb-utils";
 import { v10ApiErrors } from "../errors";
+import { getAllCharacters } from "../../../data/characters";
 
 const {
   CHARACTERS,
@@ -35,11 +35,9 @@ const {
   CHARACTERS_TEST_DETAILS,
 } = Collections;
 
-export async function getCharacters({ isTest, size }: CharacterParams = {}) {
-  const collection = isTest ? CHARACTERS_TEST : CHARACTERS;
-
-  const { data } = await getRawCollectionData(collection, size);
-  const characterData: CharactersBodyWithID[] = data.data.map((character) =>
+export async function getCharacters({ size }: CharacterParams = {}) {
+  const data = getAllCharacters(size);
+  const characterData: CharactersBodyWithID[] = data.map((character) =>
     setCharacterObjV10(character as CharacterDoc)
   );
 
