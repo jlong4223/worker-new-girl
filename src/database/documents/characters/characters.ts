@@ -4,25 +4,23 @@ import {
 } from "@gearsnbeans/faunadb-utils";
 import {
 	getAllCharacters,
+	getCharacterByType,
 	getCharacterDataById,
 	getCharacterDetailsById,
 } from "../../../data/characters";
 import {
 	setCharacterAllDataObjForRes,
 	setCharacterAndDetailsObjForRes,
-	setCharacterObj,
 	setCharacterObjV10,
 } from "../../../utils/conversions";
 import { apiResponse } from "../../../utils/routes";
 import { Collections } from "../../collections";
 import {
 	getCharacterDetailsByRefIndex,
-	getCharacterTypeIndex,
 	getQuotesByCharacterIdIndex,
 } from "../../indexes";
 import { v10ApiErrors } from "../errors";
 import {
-	AllDocumentRefs,
 	CharacterDetailsRes,
 	CharacterDoc,
 	CharacterParams,
@@ -64,17 +62,9 @@ export const createNewCharacter = async (
 	return newCharacterResult;
 };
 
-// TODO need to use local data for this
 export const getCharacterType = async (type: CharacterType) => {
-	const charactersDataWithRef: AllDocumentRefs = await getCharacterTypeIndex(
-		type
-	);
-
-	const characterDataAndID = charactersDataWithRef.data.map(
-		(characterData: any) => setCharacterObj(characterData)
-	);
-
-	return characterDataAndID;
+	const charactersByType = getCharacterByType(type);
+	return charactersByType;
 };
 
 export const updateCharacter = async (
