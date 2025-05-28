@@ -1,6 +1,6 @@
 import { getRawCollectionDocData } from "@gearsnbeans/faunadb-utils";
 import { Collections } from "../../fauna_deprecated/collections";
-import { getQuotesByCharacterIdIndex } from "../../indexes";
+import { getQuotesByCharacterIdIndex } from "../../fauna_deprecated/indexes";
 
 export const getAllQuotes = async () => {
 	const quotes = await getRawCollectionDocData(Collections.QUOTES);

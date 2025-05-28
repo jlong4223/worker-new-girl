@@ -18,7 +18,7 @@ import { Collections } from "../../fauna_deprecated/collections";
 import {
 	getCharacterDetailsByRefIndex,
 	getQuotesByCharacterIdIndex,
-} from "../../indexes";
+} from "../../fauna_deprecated/indexes";
 import { v10ApiErrors } from "../errors";
 import {
 	CharacterDetailsRes,
