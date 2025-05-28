@@ -14,7 +14,7 @@ import {
 	setCharacterObjV10,
 } from "../../../utils/conversions";
 import { apiResponse } from "../../../utils/routes";
-import { Collections } from "../../collections";
+import { Collections } from "../../fauna_deprecated/collections";
 import {
 	getCharacterDetailsByRefIndex,
 	getQuotesByCharacterIdIndex,
